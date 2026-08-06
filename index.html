@@ -71,7 +71,6 @@
             object-fit: cover;
             object-position: center;
         }
-        /* Estilo para forzar logotipos a blanco monocromático uniforme */
         .logo-white-filter {
             filter: brightness(0) invert(1);
             transition: opacity 0.3s ease;
@@ -83,11 +82,10 @@
     <!-- CONFIGURACIÓN GLOBAL DE URLS Y REDES -->
     <script>
         const GITHUB_BASE_URL = "https://raw.githubusercontent.com/calebdelapiedra/web-caleb/main/";
-        const WHATSAPP_NUMBER = "51999999999"; // Cambiar por tu número real sin el +
+        const WHATSAPP_NUMBER = "51999999999"; 
         const SHEET_CONTACTO_URL = "";
         const SHEET_DIAGNOSTICO_URL = "";
 
-        // URLS REDES SOCIALES OFICIALES
         const SOCIAL_URLS = {
             instagram: "http://instagram.com/calebdelapiedra/",
             facebook: "https://www.facebook.com/CalebDLP/",
@@ -138,7 +136,7 @@
 
     <!-- ==================== VISTA: HOME ==================== -->
     <div x-show="currentView === 'home'">
-        <!-- SECCIÓN 01 — HERO DIRECTO -->
+        <!-- SECCIÓN 01 — HERO DIRECTO CON fotoportada.png -->
         <section id="inicio" class="relative min-h-[85vh] flex items-center pt-12 pb-20 px-6 overflow-hidden border-b border-brand-border bg-brand-black">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                 <div class="lg:col-span-7 space-y-8">
@@ -165,7 +163,7 @@
                 </div>
 
                 <div class="lg:col-span-5 flex justify-center items-center">
-                    <img :src="GITHUB_BASE_URL + 'foto%20portada.png'" alt="Caleb De La Piedra" class="w-full h-auto max-h-[620px] object-contain">
+                    <img :src="GITHUB_BASE_URL + 'fotoportada.png'" alt="Caleb De La Piedra" class="w-full h-auto max-h-[620px] object-contain">
                 </div>
             </div>
         </section>
@@ -321,7 +319,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 06 — ¿Y QUIÉN SOY YO? (LOGOS EN BLANCO Y CON TAMAÑO NORMALIZADO) -->
+        <!-- SECCIÓN 06 — ¿Y QUIÉN SOY YO? -->
         <section class="py-28 px-6 bg-brand-smoke border-b border-brand-border">
             <div class="max-w-7xl mx-auto space-y-12">
                 <div class="max-w-3xl space-y-6">
@@ -334,7 +332,6 @@
                     </p>
                 </div>
 
-                <!-- REJILLA DE LOGOS ESTANDARIZADOS A COLOR BLANCO MONOCROMÁTICO Y TAMAÑO UNIFORME -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
                     <div class="h-28 px-6 rounded-2xl border border-brand-border bg-brand-darkCard flex items-center justify-center">
                         <img :src="GITHUB_BASE_URL + 'logo-nomade.png'" alt="Nómade Brand Booster" class="max-h-12 max-w-[140px] w-auto object-contain logo-white-filter">
@@ -352,11 +349,12 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 07 — NÓMADE BRAND BOOSTER -->
+        <!-- SECCIÓN 07 — NÓMADE BRAND BOOSTER CON vídeonomade.mp4 Y nomadeimagen.jpg -->
         <section id="nomade" class="relative py-28 px-6 overflow-hidden border-b border-brand-border bg-brand-black">
             <div class="nomade-video-container">
                 <video autoplay loop muted playsinline class="nomade-video-element opacity-80">
-                    <source :src="GITHUB_BASE_URL + 'v%C3%ADdeo%20nomade.mp4'" type="video/mp4">
+                    <source :src="GITHUB_BASE_URL + 'v%C3%ADdeonomade.mp4'" type="video/mp4">
+                    <source :src="GITHUB_BASE_URL + 'videonomade.mp4'" type="video/mp4">
                 </video>
             </div>
 
@@ -379,7 +377,7 @@
                 </div>
                 <div class="lg:col-span-5">
                     <div class="rounded-3xl overflow-hidden border border-brand-border/80 shadow-2xl bg-brand-darkCard/80 backdrop-blur-md p-2">
-                        <img :src="GITHUB_BASE_URL + 'nomade%20imagen.jpg'" alt="Nómade Brand Booster" class="w-full h-auto object-cover rounded-2xl">
+                        <img :src="GITHUB_BASE_URL + 'nomadeimagen.jpg'" alt="Nómade Brand Booster" class="w-full h-auto object-cover rounded-2xl">
                     </div>
                 </div>
             </div>
