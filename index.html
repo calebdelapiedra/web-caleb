@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caleb De La Piedra — Estrategia de Alto Impacto</title>
-    <!-- Tailwind CSS via CDN -->
+    <title>Caleb De La Piedra — Asesor de Negocios y Marketing Estratégico</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js para interactividad sin recarga -->
+    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- AOS Animation Library (CSS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,12 +21,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            black: '#0A0A0A',
+                            black: '#050505',
                             white: '#FFFFFF',
                             red: '#E30613',
-                            smoke: '#121212',
-                            darkCard: '#181818',
-                            border: '#2A2A2A'
+                            smoke: '#0A0A0A',
+                            darkCard: '#121212',
+                            border: '#1F1F1F'
                         }
                     },
                     fontFamily: {
@@ -37,49 +39,55 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0A0A0A;
+            background-color: #050505;
             color: #FFFFFF;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
         .font-black-title {
             font-weight: 900;
             letter-spacing: -0.04em;
         }
         .btn-glow-red {
-            box-shadow: 0 0 25px rgba(227, 6, 19, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(227, 6, 19, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-glow-red:hover {
-            box-shadow: 0 0 35px rgba(227, 6, 19, 0.7);
-            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(227, 6, 19, 0.8);
+            transform: translateY(-3px) scale(1.02);
         }
-        .text-shadow-hero {
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-        }
+        
         .nomade-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;
         }
         .nomade-video-element {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            width: 100%; height: 100%; object-fit: cover; object-position: center;
         }
         .logo-white-filter {
-            filter: brightness(0) invert(1);
-            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(1); opacity: 0.6; transition: opacity 0.3s ease;
         }
+        .logo-white-filter:hover { opacity: 1; }
+
+        /* FONDOS ANIMADOS */
+        .bg-animated-wrapper { position: relative; overflow: hidden; }
+        .glow-blob {
+            position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none; opacity: 0.4;
+            animation: float 12s infinite ease-in-out alternate;
+        }
+        .blob-1 { width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(227,6,19,0.15) 0%, rgba(0,0,0,0) 70%); top: -10%; left: -10%; }
+        .blob-2 { width: 30vw; height: 30vw; background: radial-gradient(circle, rgba(50,50,50,0.3) 0%, rgba(0,0,0,0) 70%); bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-3 { width: 25vw; height: 25vw; background: radial-gradient(circle, rgba(227,6,19,0.1) 0%, rgba(0,0,0,0) 70%); top: 40%; left: 60%; animation-duration: 15s; }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(5vw, 5vh) scale(1.1); }
+            100% { transform: translate(-5vw, 10vh) scale(0.9); }
+        }
+        .content-relative { position: relative; z-index: 10; }
     </style>
 </head>
 <body class="bg-brand-black text-brand-white selection:bg-brand-red selection:text-brand-white" x-data="{ currentView: 'home', mobileMenu: false }">
 
-    <!-- CONFIGURACIÓN GLOBAL DE URLS Y REDES -->
+    <!-- CONFIGURACIÓN GLOBAL -->
     <script>
         const GITHUB_BASE_URL = "https://raw.githubusercontent.com/calebdelapiedra/web-caleb/main/";
         const WHATSAPP_NUMBER = "51999999999"; 
@@ -96,13 +104,13 @@
     </script>
 
     <!-- NAVEGACIÓN -->
-    <header class="sticky top-0 z-50 bg-brand-black/90 backdrop-blur-xl border-b border-brand-border/60">
+    <header class="sticky top-0 z-50 bg-brand-black/80 backdrop-blur-xl border-b border-brand-border/60">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#" @click.prevent="currentView = 'home'; window.scrollTo(0,0)" class="font-black-title text-xl sm:text-2xl uppercase tracking-tighter hover:text-brand-red transition-colors">
                 CALEB DE LA PIEDRA<span class="text-brand-red">.</span>
             </a>
             
-            <nav class="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-wider uppercase text-neutral-300">
+            <nav class="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-wider uppercase text-neutral-400">
                 <a href="#inicio" @click="currentView = 'home'" class="hover:text-brand-white transition-colors">Inicio</a>
                 <a href="#power-3" @click="currentView = 'home'" class="hover:text-brand-white transition-colors">Power 3</a>
                 <a href="#" @click.prevent="currentView = 'diagnostico'; window.scrollTo(0,0)" class="hover:text-brand-white transition-colors">Diagnóstico</a>
@@ -136,16 +144,24 @@
 
     <!-- ==================== VISTA: HOME ==================== -->
     <div x-show="currentView === 'home'">
-        <!-- SECCIÓN 01 — HERO DIRECTO -->
-        <section id="inicio" class="relative min-h-[85vh] flex items-center pt-12 pb-20 px-6 overflow-hidden border-b border-brand-border bg-brand-black">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        
+        <!-- SECCIÓN 01 — HERO DIRECTO EXACTO -->
+        <section id="inicio" class="bg-animated-wrapper relative min-h-[85vh] flex items-center pt-12 pb-20 px-6 border-b border-brand-border">
+            <div class="glow-blob blob-1"></div>
+            <div class="glow-blob blob-2"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 content-relative">
                 <div class="lg:col-span-7 space-y-8">
-                    <h1 class="font-black-title text-5xl sm:text-7xl uppercase leading-[0.95] tracking-tight">
+                    <h1 class="font-black-title text-5xl sm:text-7xl uppercase leading-[0.95] tracking-tight" data-aos="fade-up">
                         Tu empresa no tiene un problema de marketing. <br>
                         <span class="text-brand-red">Tiene un problema de decisiones.</span>
                     </h1>
+                    
+                    <p class="text-lg sm:text-xl text-neutral-400 font-light leading-relaxed max-w-2xl" data-aos="fade-up" data-aos-delay="150">
+                        Aceptémoslo: llevas meses disfrazando la falta de estrategia con reels bonitos y bailecitos. Ya es hora de ponernos serios.
+                    </p>
 
-                    <div class="flex flex-col sm:flex-row gap-5 pt-4">
+                    <div class="flex flex-col sm:flex-row gap-5 pt-4" data-aos="fade-up" data-aos-delay="300">
                         <button @click="currentView = 'diagnostico'; window.scrollTo(0,0)" class="bg-brand-red text-brand-white font-bold px-8 py-5 text-sm uppercase tracking-widest rounded-xl btn-glow-red text-center">
                             Reservar Diagnóstico Estratégico
                         </button>
@@ -153,58 +169,57 @@
                             Conocer mi metodología
                         </a>
                     </div>
-                    <div class="flex items-center gap-6 text-xs text-neutral-400 font-medium uppercase tracking-wider pt-2">
+                    
+                    <div class="flex flex-wrap items-center gap-4 text-xs text-neutral-500 font-bold uppercase tracking-widest pt-4" data-aos="fade-in" data-aos-delay="500">
                         <span>15 años de experiencia</span>
-                        <span>•</span>
+                        <span class="text-brand-red">•</span>
                         <span>Sin fórmulas de Pinterest</span>
-                        <span>•</span>
+                        <span class="text-brand-red">•</span>
                         <span>Estrategia real</span>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex justify-center items-center">
-                    <img :src="GITHUB_BASE_URL + 'fotoportada.png'" alt="Caleb De La Piedra" class="w-full h-auto max-h-[620px] object-contain">
+                <div class="lg:col-span-5 flex justify-center items-center" data-aos="zoom-in" data-aos-delay="400">
+                    <img :src="GITHUB_BASE_URL + 'fotoportada.png'" alt="Caleb De La Piedra - Asesor de Negocios" class="w-full h-auto max-h-[620px] object-contain drop-shadow-2xl">
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 01.5 — PRESENTACIÓN Y REDES SOCIALES -->
-        <section class="py-20 px-6 bg-brand-darkCard border-b border-brand-border">
-            <div class="max-w-5xl mx-auto text-center space-y-8">
-                <div class="space-y-6">
-                    <p class="text-2xl sm:text-3xl text-neutral-200 font-light leading-relaxed max-w-4xl mx-auto">
-                        Soy <strong class="text-brand-white font-bold">Caleb De La Piedra</strong>. Llevo 15 años viendo empresarios quemar miles de dólares en publicidad lo que debieron gastar en pensar primero. Ayudo a construir marcas y estrategias que venden — no que "generan awareness".
+        <!-- SECCIÓN 01.5 — PRESENTACIÓN Y REDES -->
+        <section class="py-24 px-6 bg-brand-smoke border-b border-brand-border bg-animated-wrapper">
+            <div class="glow-blob blob-3"></div>
+            
+            <div class="max-w-5xl mx-auto text-center space-y-10 content-relative">
+                <div class="space-y-6" data-aos="fade-up">
+                    <p class="text-2xl sm:text-4xl text-neutral-300 font-light leading-relaxed max-w-4xl mx-auto">
+                        Soy <strong class="text-brand-white font-black">Caleb De La Piedra</strong>. Probablemente el <strong class="text-brand-white">mejor asesor de marketing y negocios</strong> que vas a encontrar si estás harto de pagar por likes que no pagan tus facturas. Llevo 15 años viendo a "CEOs" quemar presupuestos enteros buscando agradarle al algoritmo.
                     </p>
-                    <div class="p-8 rounded-2xl bg-brand-smoke border border-brand-border border-l-4 border-l-brand-red shadow-2xl max-w-3xl mx-auto">
-                        <p class="font-bold italic text-xl sm:text-2xl text-brand-white">
-                            "La intuición no es una estrategia. Es una excusa con corbata."
+                    <div class="p-8 sm:p-10 rounded-3xl bg-brand-darkCard border border-brand-border border-l-4 border-l-brand-red shadow-2xl max-w-3xl mx-auto transform hover:scale-105 transition-transform duration-500" data-aos="zoom-in" data-aos-delay="200">
+                        <p class="font-black italic text-2xl sm:text-3xl text-brand-white">
+                            "La intuición no es una estrategia de negocios. Es una excusa vistiendo saco y corbata."
                         </p>
                     </div>
                 </div>
 
-                <!-- ÍCONOS DE REDES SOCIALES -->
-                <div class="pt-6 space-y-4">
+                <!-- Redes -->
+                <div class="pt-8 space-y-5" data-aos="fade-up" data-aos-delay="300">
                     <p class="text-xs font-bold uppercase tracking-widest text-brand-red">Conecta conmigo en redes</p>
-                    <div class="flex items-center justify-center gap-6 flex-wrap">
-                        <a :href="SOCIAL_URLS.instagram" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-smoke border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
+                    <div class="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+                        <a :href="SOCIAL_URLS.instagram" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-darkCard border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            <span class="text-xs font-bold uppercase">Instagram</span>
+                            <span class="text-xs font-bold uppercase hidden sm:inline">Instagram</span>
                         </a>
-                        <a :href="SOCIAL_URLS.facebook" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-smoke border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-                            <span class="text-xs font-bold uppercase">Facebook</span>
-                        </a>
-                        <a :href="SOCIAL_URLS.youtube" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-smoke border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
+                        <a :href="SOCIAL_URLS.youtube" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-darkCard border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                            <span class="text-xs font-bold uppercase">YouTube</span>
+                            <span class="text-xs font-bold uppercase hidden sm:inline">YouTube</span>
                         </a>
-                        <a :href="SOCIAL_URLS.tiktok" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-smoke border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
+                        <a :href="SOCIAL_URLS.tiktok" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-darkCard border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.82.57-1.33 1.55-1.3 2.55.01 1.05.58 2.05 1.48 2.58.91.54 2.1.58 3.05.12.86-.4 1.47-1.25 1.56-2.2.05-2.77.02-5.54.02-8.31 0-3.07.01-6.14-.01-9.21z"/></svg>
-                            <span class="text-xs font-bold uppercase">TikTok</span>
+                            <span class="text-xs font-bold uppercase hidden sm:inline">TikTok</span>
                         </a>
-                        <a :href="SOCIAL_URLS.linkedin" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-smoke border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
+                        <a :href="SOCIAL_URLS.linkedin" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-brand-darkCard border border-brand-border hover:border-brand-red hover:text-brand-red transition-all shadow-lg hover:scale-110 flex items-center gap-2">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            <span class="text-xs font-bold uppercase">LinkedIn</span>
+                            <span class="text-xs font-bold uppercase hidden sm:inline">LinkedIn</span>
                         </a>
                     </div>
                 </div>
@@ -212,49 +227,51 @@
         </section>
 
         <!-- SECCIÓN 02 — EL PROBLEMA -->
-        <section class="py-28 px-6 bg-brand-smoke border-b border-brand-border">
+        <section class="py-28 px-6 bg-brand-black border-b border-brand-border">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 order-2 lg:order-1">
-                    <div class="rounded-3xl overflow-hidden border border-brand-border shadow-2xl">
-                        <img :src="GITHUB_BASE_URL + 'empresario-reportes.JPG'" alt="Empresario y reportes" class="w-full h-auto object-cover">
+                <div class="lg:col-span-5 order-2 lg:order-1" data-aos="fade-right">
+                    <div class="rounded-3xl overflow-hidden border border-brand-border shadow-2xl relative group">
+                        <img :src="GITHUB_BASE_URL + 'empresario-reportes.JPG'" alt="Caleb de la Piedra Asesor de Negocios" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
-                <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
-                    <span class="text-brand-red font-bold text-xs uppercase tracking-widest">/ El ciclo del estancamiento</span>
+                <div class="lg:col-span-7 order-1 lg:order-2 space-y-6" data-aos="fade-left">
+                    <span class="text-brand-red font-bold text-xs uppercase tracking-widest border border-brand-red/30 bg-brand-red/10 px-4 py-1 rounded-full">El Circo del Marketing</span>
                     <h2 class="font-black-title text-4xl sm:text-6xl uppercase leading-none">
-                        No necesitas más marketing. <br>
-                        <span class="text-brand-red">Necesitas dejar de disfrazar la falta de estrategia con reels.</span>
+                        Deja de disfrazar la falta de estrategia. <br>
+                        <span class="text-brand-red">Es hora de tomar decisiones.</span>
                     </h2>
-                    <p class="text-neutral-300 text-lg font-light leading-relaxed">
-                        Conozco el ciclo de memoria: cambias de agencia, la agencia cambia el logo, el logo no cambia las ventas, culpas al algoritmo. El algoritmo no tiene la culpa — nunca tuvo un plan que seguir. No es que tu empresa no crezca por falta de publicidad. Es que está tomando decisiones importantes con la misma seriedad con la que se elige un filtro de Instagram. Ahí es donde empiezo a trabajar.
+                    <p class="text-neutral-400 text-lg font-light leading-relaxed">
+                        Conozco la historia de memoria: cambias de agencia, te rediseñan el logo, te ponen a bailar en TikTok, las ventas no suben y le echas la culpa al algoritmo. 
+                    </p>
+                    <p class="text-neutral-400 text-lg font-light leading-relaxed">
+                        Como <strong class="text-white">asesor de empresas</strong>, te diré lo que nadie en tu equipo se atreve a decirte: tu negocio no está estancado por falta de contenido. Está estancado porque tomas decisiones estratégicas importantes con la misma seriedad con la que eliges un filtro de Instagram.
                     </p>
                 </div>
             </div>
         </section>
 
         <!-- SECCIÓN 03 — CÓMO TRABAJO -->
-        <section class="py-28 px-6 max-w-5xl mx-auto text-center space-y-8 border-b border-brand-border">
+        <section class="py-28 px-6 max-w-5xl mx-auto text-center space-y-10 border-b border-brand-border" data-aos="fade-up">
             <span class="bg-brand-red/10 text-brand-red border border-brand-red/20 font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
-                Filosofía de trabajo
+                La Realidad Incomoda
             </span>
             <h2 class="font-black-title text-4xl sm:text-6xl uppercase leading-tight">
                 Antes de darte una estrategia, voy a hacerte quedar mal con tus propias respuestas.
             </h2>
             <p class="text-neutral-300 text-xl font-light leading-relaxed max-w-3xl mx-auto">
-                No vendo soluciones rápidas. No tengo una receta que le sirva a "todos los negocios". Primero analizo. Después pregunto lo que nadie en tu equipo se atreve a preguntarte. Recién ahí propongo. A ese proceso lo llamé **Power 3**.
+                No vendo fórmulas mágicas de agencia. Como <strong class="text-brand-white">asesor de negocios</strong>, primero te someto a un interrogatorio comercial sin piedad para entender dónde está perdiendo dinero tu empresa. A ese sistema lo llamo <strong class="text-brand-white">Power 3</strong>.
             </p>
             <div>
-                <a href="#power-3" class="inline-block bg-brand-white text-brand-black font-bold px-10 py-5 text-sm uppercase tracking-widest rounded-xl hover:bg-neutral-200 transition-all shadow-xl">
-                    Conocer Power 3
+                <a href="#power-3" class="inline-block bg-brand-white text-brand-black font-black px-10 py-5 text-sm uppercase tracking-widest rounded-xl hover:bg-neutral-200 hover:scale-105 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                    Descubrir Metodología Power 3
                 </a>
             </div>
         </section>
 
         <!-- SECCIÓN 04 — POWER 3 -->
-        <section id="power-3" class="py-28 px-6 bg-brand-white text-brand-black border-b border-brand-border">
-            <div class="max-w-7xl mx-auto space-y-16">
-                <!-- Encabezado -->
-                <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <section id="power-3" class="py-28 px-6 bg-brand-white text-brand-black border-b border-brand-border relative overflow-hidden">
+            <div class="max-w-7xl mx-auto space-y-16 relative z-10">
+                <div class="text-center space-y-6 max-w-3xl mx-auto" data-aos="fade-up">
                     <span class="text-brand-red font-bold text-xs uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full">
                         Metodología Propietaria
                     </span>
@@ -262,69 +279,67 @@
                         Power 3: Un sistema en 3 pasos. <br>
                         <span class="text-brand-red">No tres servicios aislados.</span>
                     </h2>
-                    <p class="text-neutral-600 text-base sm:text-lg font-normal pt-2">
+                    <p class="text-neutral-700 text-lg font-medium leading-relaxed">
                         El marketing no falla por falta de creatividad; falla porque se intenta comunicar antes de construir la marca, y se intenta construir la marca sin tener una estrategia clara. **Power 3 une los puntos en el orden correcto:**
                     </p>
                 </div>
 
-                <!-- Tarjetas del Sistema Progresivo -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- PASO 1 -->
-                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl transition-all relative overflow-hidden">
-                        <div class="absolute top-4 right-6 text-6xl font-black text-neutral-200 select-none">01</div>
+                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">01</div>
                         <div class="space-y-4 relative z-10">
-                            <span class="inline-block bg-brand-black text-brand-white font-bold text-xs px-3 py-1 rounded-md uppercase tracking-wider">Fase I</span>
+                            <span class="inline-block bg-brand-black text-brand-white font-black text-[10px] px-3 py-1 rounded-md uppercase tracking-wider">Fase I</span>
                             <h3 class="font-black-title text-3xl uppercase">Estrategia</h3>
                             <p class="font-bold text-brand-red text-base">La Claridad Comercial</p>
-                            <p class="text-neutral-600 text-sm font-light leading-relaxed">
+                            <p class="text-neutral-600 text-sm font-medium leading-relaxed">
                                 Antes de diseñar o publicar, auditamos tus números, tus márgenes y tus cuellos de botella. Definimos exactamente **a quién le vendes, a qué precio y por qué te van a elegir a ti**.
                             </p>
                         </div>
-                        <div class="pt-4 border-t border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <div class="pt-4 border-t border-neutral-200 text-xs font-black text-neutral-500 uppercase tracking-wider">
                             Sin esto: Gastas dinero a ciegas.
                         </div>
                     </div>
 
                     <!-- PASO 2 -->
-                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl transition-all relative overflow-hidden">
-                        <div class="absolute top-4 right-6 text-6xl font-black text-neutral-200 select-none">02</div>
+                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">02</div>
                         <div class="space-y-4 relative z-10">
-                            <span class="inline-block bg-brand-black text-brand-white font-bold text-xs px-3 py-1 rounded-md uppercase tracking-wider">Fase II</span>
+                            <span class="inline-block bg-brand-black text-brand-white font-black text-[10px] px-3 py-1 rounded-md uppercase tracking-wider">Fase II</span>
                             <h3 class="font-black-title text-3xl uppercase">Marca</h3>
                             <p class="font-bold text-brand-red text-base">El Posicionamiento</p>
-                            <p class="text-neutral-600 text-sm font-light leading-relaxed">
+                            <p class="text-neutral-600 text-sm font-medium leading-relaxed">
                                 Traducimos la estrategia en una ventaja competitiva visible. Construimos una identidad de marca potente que proyecte autoridad para que **dejes de competir por precio o rogando descuentos**.
                             </p>
                         </div>
-                        <div class="pt-4 border-t border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <div class="pt-4 border-t border-neutral-200 text-xs font-black text-neutral-500 uppercase tracking-wider">
                             Sin esto: Eres uno más del montón.
                         </div>
                     </div>
 
                     <!-- PASO 3 -->
-                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl transition-all relative overflow-hidden">
-                        <div class="absolute top-4 right-6 text-6xl font-black text-neutral-200 select-none">03</div>
+                    <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+                        <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">03</div>
                         <div class="space-y-4 relative z-10">
-                            <span class="inline-block bg-brand-black text-brand-white font-bold text-xs px-3 py-1 rounded-md uppercase tracking-wider">Fase III</span>
+                            <span class="inline-block bg-brand-black text-brand-white font-black text-[10px] px-3 py-1 rounded-md uppercase tracking-wider">Fase III</span>
                             <h3 class="font-black-title text-3xl uppercase">Comunicación</h3>
                             <p class="font-bold text-brand-red text-base">El Sistema de Ventas</p>
-                            <p class="text-neutral-600 text-sm font-light leading-relaxed">
+                            <p class="text-neutral-600 text-sm font-medium leading-relaxed">
                                 Diseñamos la narrativa, los contenidos y los embudos comerciales directos para salir al mercado. Ponemos la marca a trabajar en **atraer, persuadir y cerrar clientes reales**.
                             </p>
                         </div>
-                        <div class="pt-4 border-t border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <div class="pt-4 border-t border-neutral-200 text-xs font-black text-neutral-500 uppercase tracking-wider">
                             Sin esto: Nadie se entera de lo que vales.
                         </div>
                     </div>
                 </div>
 
-                <!-- Conclusión del sistema -->
-                <div class="p-8 rounded-2xl bg-neutral-900 text-brand-white text-center space-y-4 max-w-4xl mx-auto shadow-2xl">
+                <div class="p-8 sm:p-12 rounded-3xl bg-brand-black text-brand-white text-center space-y-6 max-w-4xl mx-auto shadow-2xl" data-aos="zoom-in">
                     <p class="text-xl sm:text-2xl font-light leading-relaxed">
                         "Power 3 funciona porque es una **cadena**: la Estrategia le da dirección a la Marca, y la Marca le da fuerza a la Comunicación. Si falta un eslabón, la cadena se rompe."
                     </p>
-                    <div class="pt-2">
-                        <button @click="currentView = 'diagnostico'; window.scrollTo(0,0)" class="bg-brand-red text-brand-white font-bold px-8 py-4 text-xs uppercase tracking-widest rounded-xl btn-glow-red">
+                    <div class="pt-4">
+                        <button @click="currentView = 'diagnostico'; window.scrollTo(0,0)" class="bg-brand-red text-brand-white font-bold px-10 py-5 text-sm uppercase tracking-widest rounded-xl btn-glow-red">
                             Aplicar Power 3 a mi empresa
                         </button>
                     </div>
@@ -332,30 +347,32 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 05 — TRABAJEMOS JUNTOS -->
-        <section id="asesoria" class="py-28 px-6 max-w-7xl mx-auto space-y-16 border-b border-brand-border">
-            <h2 class="font-black-title text-4xl sm:text-6xl uppercase text-center">
-                Dos caminos. Ninguno es <span class="text-brand-red">"pensarlo un poco más"</span>.
+        <!-- SECCIÓN 05 — SERVICIOS RESUMIDOS DE PORTADA -->
+        <section id="asesoria" class="py-28 px-6 max-w-7xl mx-auto space-y-16 border-b border-brand-border bg-animated-wrapper">
+            <div class="glow-blob blob-2"></div>
+            <h2 class="font-black-title text-4xl sm:text-6xl uppercase text-center content-relative" data-aos="fade-up">
+                Dos caminos. <br><span class="text-brand-red">Ninguno es "pensarlo un poco más".</span>
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- TARJETA 1: DIAGNÓSTICO -->
-                <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border flex flex-col justify-between space-y-8 hover:border-brand-red transition-all shadow-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 content-relative">
+                <div class="p-10 rounded-3xl bg-brand-smoke border border-brand-border flex flex-col justify-between space-y-8 hover:border-brand-red transition-all shadow-2xl" data-aos="fade-right">
                     <div class="space-y-4">
-                        <span class="text-brand-red font-bold text-xs uppercase tracking-widest">Enfoque Ágil</span>
+                        <div class="flex items-center justify-between">
+                            <span class="text-brand-red font-bold text-xs uppercase tracking-widest">Enfoque Ágil</span>
+                            <span class="bg-brand-red text-brand-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">HOY GRATIS (VALOR $150 USD)</span>
+                        </div>
                         <h3 class="font-black-title text-3xl uppercase">Diagnóstico Estratégico de Crecimiento</h3>
                         <p class="text-neutral-300 text-lg font-light leading-relaxed">
                             Descubre qué está frenando el crecimiento de tu empresa y qué deberías hacer para llevarla al siguiente nivel. Identificamos dónde está el verdadero problema.
                         </p>
                     </div>
-                    <div class="space-y-3 pt-4">
+                    <div class="pt-4">
                         <button @click="currentView = 'diagnostico'; window.scrollTo(0,0)" class="bg-brand-red text-brand-white font-bold px-8 py-5 text-center text-xs uppercase tracking-widest rounded-xl btn-glow-red w-full">
                             Ver información y Agendar
                         </button>
                     </div>
                 </div>
 
-                <!-- TARJETA 2: ASESORÍA PREMIUM -->
-                <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border flex flex-col justify-between space-y-8 hover:border-brand-white transition-all shadow-2xl">
+                <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border flex flex-col justify-between space-y-8 hover:border-brand-white transition-all shadow-2xl" data-aos="fade-left">
                     <div class="space-y-4">
                         <span class="text-neutral-400 font-bold text-xs uppercase tracking-widest">Acompañamiento Directo</span>
                         <h3 class="font-black-title text-3xl uppercase">Asesoría Premium de Crecimiento</h3>
@@ -363,7 +380,7 @@
                             Un acompañamiento estratégico continuo para empresarios que quieren construir una empresa más sólida, rentable y tomar mejores decisiones cada día.
                         </p>
                     </div>
-                    <div class="space-y-3 pt-4">
+                    <div class="pt-4">
                         <button @click="currentView = 'asesoria'; window.scrollTo(0,0)" class="border border-brand-border hover:border-brand-white text-brand-white font-bold px-8 py-5 text-center text-xs uppercase tracking-widest rounded-xl transition-colors w-full">
                             Ver información y Solicitar
                         </button>
@@ -372,20 +389,20 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 06 — ¿Y QUIÉN SOY YO? -->
-        <section class="py-28 px-6 bg-brand-smoke border-b border-brand-border">
+        <!-- SECCIÓN 06 — CREDIBILIDAD -->
+        <section class="py-24 px-6 bg-brand-smoke border-b border-brand-border">
             <div class="max-w-7xl mx-auto space-y-12">
-                <div class="max-w-3xl space-y-6">
+                <div class="max-w-3xl space-y-6" data-aos="fade-up">
                     <span class="text-brand-red font-bold text-xs uppercase tracking-widest">/ Credibilidad y Empresas</span>
-                    <h2 class="font-black-title text-4xl sm:text-6xl uppercase leading-none">
+                    <h2 class="font-black-title text-4xl sm:text-5xl uppercase leading-none">
                         Buena pregunta. La misma que le hago a cualquiera antes de venderle algo.
                     </h2>
-                    <p class="text-neutral-300 text-lg font-light">
+                    <p class="text-neutral-400 text-lg font-light">
                         Internet está lleno de gente enseñando a hacer crecer empresas que nunca dirigieron. Yo empecé al revés: construí las empresas primero, el discurso vino después. 15 años, varios errores caros en dólares, y todo ese aprendizaje ahora vive en Power 3 y en las marcas que fundé.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="h-28 px-6 rounded-2xl border border-brand-border bg-brand-darkCard flex items-center justify-center">
                         <img :src="GITHUB_BASE_URL + 'logo-nomade.png'" alt="Nómade Brand Booster" class="max-h-12 max-w-[140px] w-auto object-contain logo-white-filter">
                     </div>
@@ -402,35 +419,32 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 07 — NÓMADE BRAND BOOSTER -->
+        <!-- SECCIÓN 07 — NÓMADE -->
         <section id="nomade" class="relative py-28 px-6 overflow-hidden border-b border-brand-border bg-brand-black">
             <div class="nomade-video-container">
-                <video autoplay loop muted playsinline class="nomade-video-element opacity-80">
+                <video autoplay loop muted playsinline class="nomade-video-element opacity-40">
                     <source :src="GITHUB_BASE_URL + 'v%C3%ADdeonomade.mp4'" type="video/mp4">
                     <source :src="GITHUB_BASE_URL + 'videonomade.mp4'" type="video/mp4">
                 </video>
             </div>
-
-            <div class="absolute inset-0 bg-brand-black/40 pointer-events-none z-0"></div>
-
             <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-shadow-hero">
-                    <h2 class="font-black-title text-4xl sm:text-6xl uppercase">
+                <div class="lg:col-span-7 space-y-6" data-aos="fade-right">
+                    <h2 class="font-black-title text-4xl sm:text-6xl uppercase leading-tight">
                         Ah sí, también tengo una agencia. <br>
                         <span class="text-brand-red">Relájate, no te la voy a vender aquí.</span>
                     </h2>
-                    <p class="text-white text-lg font-normal leading-relaxed">
-                        Terminamos el Diagnóstico o la Asesoría y llega la pregunta obvia: "Caleb, ¿y quién me hace esto?" Depende. Tu estrategia sale de aquí siendo 100% tuya — con o sin mí. La puede ejecutar tu equipo, tu agencia actual, o quien tú quieras. Si prefieres no explicarle el brief a alguien nuevo por sexta vez en el año, ahí está Nómade — la monté para ejecutar exactamente lo que yo mismo diseño, sin ser una agencia que "también hace de todo". Para que quede claro: no estamos en todas partes ni queremos estarlo. Tomamos pocos clientes porque la estrategia se cae cuando se ejecuta a las apuradas. Es una opción, no un paso obligatorio.
+                    <p class="text-neutral-300 text-lg font-light leading-relaxed">
+                        Terminamos el Diagnóstico o la Asesoría y llega la pregunta obvia: "Caleb, ¿y quién me hace esto?" Depende. Tu estrategia sale de aquí siendo 100% tuya — con o sin mí. La puede ejecutar tu equipo, tu agencia actual, o quien tú quieras. Si prefieres no explicarle el brief a alguien nuevo por sexta vez en el año, ahí está Nómade — la monté para ejecutar exactamente lo que yo mismo diseño, sin ser una agencia que "también hace de todo". Tomamos pocos clientes porque la estrategia se cae cuando se ejecuta a las apuradas.
                     </p>
-                    <div class="pt-2">
-                        <a href="https://nomadebb.netlify.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-red text-brand-white font-bold px-8 py-4 rounded-xl text-xs uppercase tracking-widest btn-glow-red shadow-2xl">
+                    <div class="pt-4">
+                        <a href="https://nomadebb.netlify.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-red text-brand-white font-black px-8 py-5 rounded-xl text-xs uppercase tracking-widest btn-glow-red shadow-2xl">
                             <span>⚡ Conocer Nómade</span>
                         </a>
                     </div>
                 </div>
-                <div class="lg:col-span-5">
-                    <div class="rounded-3xl overflow-hidden border border-brand-border/80 shadow-2xl bg-brand-darkCard/80 backdrop-blur-md p-2">
-                        <img :src="GITHUB_BASE_URL + 'nomadeimagen.jpg'" alt="Nómade Brand Booster" class="w-full h-auto object-cover rounded-2xl">
+                <div class="lg:col-span-5" data-aos="fade-left">
+                    <div class="rounded-3xl overflow-hidden border border-brand-border shadow-2xl bg-brand-smoke p-2">
+                        <img :src="GITHUB_BASE_URL + 'nomadeimagen.jpg'" alt="Agencia de Crecimiento Nómade" class="w-full h-auto object-cover rounded-2xl">
                     </div>
                 </div>
             </div>
@@ -439,79 +453,63 @@
         <!-- SECCIÓN 08 — IDEAS PARA EMPRESARIOS -->
         <section id="ideas" class="py-28 px-6 bg-brand-smoke border-b border-brand-border">
             <div class="max-w-7xl mx-auto space-y-12">
-                <h2 class="font-black-title text-4xl sm:text-6xl uppercase text-center">
+                <h2 class="font-black-title text-4xl sm:text-5xl uppercase text-center" data-aos="fade-up">
                     Si vas a perder el tiempo en el feed, <br>
                     <span class="text-brand-red">que al menos te sirva para algo.</span>
                 </h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- TARJETA 1: IDENTIDAD QUE VENDE -->
-                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl">
-                        <div class="space-y-3">
+                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                        <div class="space-y-4">
                             <span class="text-4xl">📖</span>
                             <h3 class="font-black-title text-xl uppercase">Identidad que Vende</h3>
-                            <p class="text-neutral-400 text-sm font-light leading-relaxed">
-                                Mi libro donde te enseño a construir marcas que dominan su nicho y dejan de competir por precio.
-                            </p>
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Mi libro donde te enseño a construir marcas que dominan su nicho y dejan de competir por precio.</p>
                         </div>
                         <a href="https://hotmart.com/es/marketplace/productos/identidad-que-vende/F105823843K" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand-red text-brand-white text-center font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-widest hover:bg-white hover:text-brand-black transition-colors">
                             Obtener Libro
                         </a>
                     </div>
 
-                    <!-- TARJETA 2: CONFERENCIAS -->
-                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl">
-                        <div class="space-y-3">
+                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                        <div class="space-y-4">
                             <span class="text-4xl">🎤</span>
                             <h3 class="font-black-title text-xl uppercase">Conferencias</h3>
-                            <p class="text-neutral-400 text-sm font-light leading-relaxed">
-                                Ponencias comerciales de alto impacto sobre decisiones, estrategia y posicionamiento para tu organización.
-                            </p>
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Ponencias comerciales de alto impacto sobre decisiones, estrategia y posicionamiento para tu organización.</p>
                         </div>
                         <a :href="`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Caleb, cuando es tu proximo evento presencial o virtual')}`" target="_blank" rel="noopener noreferrer" class="block w-full border border-brand-border hover:border-brand-white text-brand-white text-center font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-widest transition-colors">
                             Consultar Fechas
                         </a>
                     </div>
 
-                    <!-- TARJETA 3: EVENTOS PRIVADOS -->
-                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl">
-                        <div class="space-y-3">
+                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                        <div class="space-y-4">
                             <span class="text-4xl">🏛️</span>
                             <h3 class="font-black-title text-xl uppercase">Eventos Privados</h3>
-                            <p class="text-neutral-400 text-sm font-light leading-relaxed">
-                                Mesas de trabajo exclusivas y workshops privados para comités ejecutivos y dueños de negocio.
-                            </p>
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Mesas de trabajo exclusivas y workshops privados para comités ejecutivos y dueños de negocio.</p>
                         </div>
                         <a :href="`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Caleb, cuando es tu proximo evento presencial o virtual')}`" target="_blank" rel="noopener noreferrer" class="block w-full border border-brand-border hover:border-brand-white text-brand-white text-center font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-widest transition-colors">
                             Agendar Evento
                         </a>
                     </div>
 
-                    <!-- TARJETA 4: PODCAST Y CONTENIDO -->
-                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl">
-                        <div class="space-y-3">
+                    <div class="p-8 rounded-3xl border border-brand-border bg-brand-darkCard flex flex-col justify-between space-y-6 hover:border-brand-red transition-all shadow-xl" data-aos="fade-up" data-aos-delay="400">
+                        <div class="space-y-4">
                             <span class="text-4xl">🎙️</span>
                             <h3 class="font-black-title text-xl uppercase">Podcast & Contenido</h3>
-                            <p class="text-neutral-400 text-sm font-light leading-relaxed">
-                                Reflexiones diarias, análisis de casos reales y estrategia sin filtro directo en mi canal de Instagram.
-                            </p>
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Reflexiones diarias, análisis de casos reales y estrategia sin filtro directo en mi canal de Instagram.</p>
                         </div>
                         <a :href="SOCIAL_URLS.instagram" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand-smoke border border-brand-border hover:border-brand-red text-brand-white text-center font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-widest transition-colors">
                             Ver Instagram
                         </a>
                     </div>
                 </div>
-
-                <p class="text-center font-light text-neutral-400 max-w-2xl mx-auto pt-4">
-                    Cada libro, charla o publicación tiene el mismo objetivo: que tomes mejores decisiones antes de gastar el próximo presupuesto de marketing.
-                </p>
             </div>
         </section>
 
         <!-- SECCIÓN 09 — CTA FINAL -->
         <section class="py-28 px-6 max-w-6xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-8">
+                <div class="lg:col-span-7 space-y-8" data-aos="fade-right">
                     <h2 class="font-black-title text-5xl sm:text-7xl uppercase">
                         Antes de invertir un <span class="text-brand-red">dólar más...</span>
                     </h2>
@@ -528,7 +526,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="lg:col-span-5">
+                <div class="lg:col-span-5" data-aos="fade-left">
                     <div class="rounded-3xl overflow-hidden border border-brand-border shadow-2xl">
                         <img :src="GITHUB_BASE_URL + 'cierres.jpg'" alt="Caleb De La Piedra Cierre" class="w-full h-auto object-cover">
                     </div>
@@ -537,87 +535,153 @@
         </section>
     </div>
 
-    <!-- ==================== VISTA COMPLETA: /diagnostico ==================== -->
-    <div x-show="currentView === 'diagnostico'" class="py-20 px-6 max-w-6xl mx-auto space-y-16">
-        <!-- Encabezado -->
-        <div class="space-y-4 text-center max-w-4xl mx-auto">
-            <span class="text-brand-red font-bold text-xs uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/20">Servicio Estratégico Ágil</span>
+    <!-- ==================== VISTA COMPLETA Y REDISEÑADA: /diagnostico ==================== -->
+    <div x-show="currentView === 'diagnostico'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper" style="display: none;">
+        <div class="glow-blob blob-3"></div>
+
+        <!-- Encabezado con Destacado Especial -->
+        <div class="space-y-6 text-center max-w-4xl mx-auto content-relative" data-aos="fade-down">
+            <div class="inline-flex items-center gap-2 bg-brand-red text-brand-white font-black text-xs uppercase px-5 py-2.5 rounded-full tracking-wider btn-glow-red animate-pulse">
+                <span>🔥 VALORADO EN $150 USD — GRATIS AHORA</span>
+            </div>
             <h1 class="font-black-title text-4xl sm:text-6xl uppercase leading-tight">DIAGNÓSTICO ESTRATÉGICO DE CRECIMIENTO</h1>
             <p class="text-neutral-300 text-xl font-light max-w-3xl mx-auto leading-relaxed">Descubre qué está frenando el crecimiento de tu empresa y qué deberías hacer para llevarla al siguiente nivel.</p>
         </div>
 
-        <!-- Bloque 1: Introducción con Imagen 'consultoria2.png' -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-6">
+        <!-- Bloque 1: Introducción Sarcástica con Imagen 'consultoria2.png' -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
+            <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-6" data-aos="fade-right">
                 <p class="text-lg text-neutral-300 font-light leading-relaxed">
-                    Muchos empresarios creen que su problema es la falta de ventas. Otros piensan que necesitan invertir más en publicidad o cambian constantemente de agencia.
+                    Muchos empresarios creen que su problema es la falta de ventas. Otros piensan que necesitan invertir más dinero en publicidad. Algunos incluso cambian constantemente de agencia, de equipo o de estrategia esperando resultados diferentes.
                 </p>
                 <div class="p-6 rounded-2xl bg-brand-smoke border-l-4 border-l-brand-red">
                     <p class="font-bold text-brand-white text-lg">"La mayoría de las empresas no deja de crecer por falta de esfuerzo. Se estanca porque está resolviendo el problema equivocado."</p>
                 </div>
-                <p class="text-neutral-300 font-light">
-                    Durante el Diagnóstico analizaremos tu empresa desde una perspectiva integral para entender qué está funcionando, qué limita tus resultados y cuáles son tus mejores oportunidades.
+                <p class="text-neutral-300 font-light leading-relaxed">
+                    Mi trabajo como <strong class="text-white">asesor de negocios</strong> consiste en ayudarte a identificar exactamente dónde está ese problema. Durante el Diagnóstico Estratégico de Crecimiento analizaremos tu empresa desde una perspectiva integral para entender qué está funcionando, qué está limitando tus resultados y cuáles son las oportunidades realistas que hoy tienes frente a ti.
                 </p>
+                <div class="p-4 rounded-xl bg-brand-black/50 border border-brand-border text-sm text-neutral-400 space-y-1">
+                    <p class="font-bold text-brand-white">Lo que te garantizo:</p>
+                    <p>• No recibirás consejos genéricos de libro.</p>
+                    <p>• No saldrás con una lista de tareas sin sentido.</p>
+                    <p>• Saldrás con absoluta claridad. Y cuando un empresario tiene claridad, las decisiones comerciales se vuelven brutalmente simples.</p>
+                </div>
             </div>
-            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[380px]">
+            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[480px]" data-aos="fade-left">
                 <img :src="GITHUB_BASE_URL + 'consultoria2.png'" alt="Consultoría Caleb 2" class="w-full h-full object-cover">
             </div>
         </div>
 
-        <!-- Factores a analizar -->
-        <div class="space-y-8">
-            <h2 class="font-black-title text-3xl sm:text-4xl uppercase text-center">¿Qué analizaremos durante la sesión?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-3">
-                    <span class="text-brand-red font-bold text-xs uppercase">01 / Negocio</span>
-                    <h3 class="font-black-title text-xl uppercase">Estrategia de negocio</h3>
-                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Modelo de negocio, propuesta de valor, diferenciación y ventajas competitivas para validar si la estrategia actual es la adecuada.</p>
+        <!-- ¿Qué analizaremos? DESARROLLO COMPLETO PALABRA POR PALABRA -->
+        <div class="space-y-8 content-relative">
+            <div class="text-center space-y-3" data-aos="fade-up">
+                <h2 class="font-black-title text-3xl sm:text-5xl uppercase">¿Qué analizaremos en la sesión?</h2>
+                <p class="text-neutral-400 text-lg font-light max-w-2xl mx-auto">Durante la sesión revisaremos cada uno de los factores clave que impactan directamente en el crecimiento de tu empresa:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 1. Estrategia de negocio -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="100">
+                    <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">01 / Negocio</span>
+                    <h3 class="font-black-title text-2xl uppercase">Estrategia de negocio</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Analizaremos tu modelo de negocio, propuesta de valor, diferenciación real, ventajas competitivas y la etapa exacta en la que se encuentra tu empresa para determinar si la estrategia actual sigue siendo la adecuada.
+                    </p>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-3">
-                    <span class="text-brand-red font-bold text-xs uppercase">02 / Marca</span>
-                    <h3 class="font-black-title text-xl uppercase">Marketing y posicionamiento</h3>
-                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Evaluación de marca, comunicación, presencia digital, publicidad, web y embudos de captación.</p>
+
+                <!-- 2. Marketing y posicionamiento -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">02 / Marca</span>
+                    <h3 class="font-black-title text-2xl uppercase">Marketing y posicionamiento</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Evaluaremos tu marca, comunicación, presencia digital, contenido, publicidad pagada, página web y embudos de captación para identificar fugas de dinero y oportunidades de mejora.
+                    </p>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-3">
-                    <span class="text-brand-red font-bold text-xs uppercase">03 / Ventas</span>
-                    <h3 class="font-black-title text-xl uppercase">Proceso comercial</h3>
-                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Revisión del flujo de prospectos, tasas de conversión, seguimiento y factores que afectan el cierre.</p>
+
+                <!-- 3. Proceso comercial -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="300">
+                    <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">03 / Ventas</span>
+                    <h3 class="font-black-title text-2xl uppercase">Proceso comercial</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Revisaremos cómo llegan tus prospectos, cómo vende tu equipo, cómo convierten, cómo realizan el seguimiento y qué factores humanos o de proceso están afectando el cierre de ventas.
+                    </p>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-3">
-                    <span class="text-brand-red font-bold text-xs uppercase">04 / Clientes</span>
-                    <h3 class="font-black-title text-xl uppercase">Experiencia del cliente</h3>
-                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Atención, proceso de compra, postventa y percepción real del mercado sobre tu empresa.</p>
+
+                <!-- 4. Experiencia del cliente -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="400">
+                    <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">04 / Clientes</span>
+                    <h3 class="font-black-title text-2xl uppercase">Experiencia del cliente</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Analizaremos la atención, el flujo de compra, la postventa y la percepción real que tienen tus clientes sobre tu empresa (lo que dicen de ti cuando no estás en la sala).
+                    </p>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-3 md:col-span-2">
-                    <span class="text-brand-red font-bold text-xs uppercase">05 / Escala</span>
-                    <h3 class="font-black-title text-xl uppercase">Operación y Crecimiento</h3>
-                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Organización de procesos, delegación, escalabilidad y detección de cuellos de botella operativos que impiden el crecimiento.</p>
+
+                <!-- 5. Operación y crecimiento -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3 md:col-span-2" data-aos="zoom-in" data-aos-delay="500">
+                    <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">05 / Escala</span>
+                    <h3 class="font-black-title text-2xl uppercase">Operación y crecimiento</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Evaluaremos procesos internos, organización, nivel de delegación, escalabilidad y posibles cuellos de botella operativos que hoy te tienen atrapado trabajando *para* la empresa en lugar de *en* la empresa.
+                    </p>
                 </div>
             </div>
         </div>
 
         <!-- Bloque 2: Entregables con Imagen 'consultoria3.webp' -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[320px] order-2 lg:order-1">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
+            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[380px] order-2 lg:order-1" data-aos="fade-right">
                 <img :src="GITHUB_BASE_URL + 'consultoria3.webp'" alt="Consultoría Caleb 3" class="w-full h-full object-cover">
             </div>
-            <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-smoke border border-brand-border space-y-6 order-1 lg:order-2">
-                <h3 class="font-black-title text-2xl uppercase">Lo que recibirás al finalizar:</h3>
-                <div class="space-y-3 text-neutral-300 font-light text-base">
-                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Un diagnóstico estratégico completo.</div>
-                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Identificación de las principales oportunidades.</div>
-                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Detección de los factores que frenan tus ventas.</div>
-                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Recomendaciones específicas para tu caso.</div>
-                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Una hoja de ruta priorizada con los siguientes pasos claros.</div>
+            <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-smoke border border-brand-border space-y-6 order-1 lg:order-2" data-aos="fade-left">
+                <h3 class="font-black-title text-3xl uppercase">¿Qué recibirás al finalizar?</h3>
+                <div class="space-y-4 text-neutral-300 font-light text-base">
+                    <div class="flex items-start gap-3"><span class="text-brand-red font-bold text-xl">✔</span> <span><strong>Un diagnóstico estratégico completo</strong> de tu situación actual.</span></div>
+                    <div class="flex items-start gap-3"><span class="text-brand-red font-bold text-xl">✔</span> <span><strong>Identificación de oportunidades</strong> de mejora con alto retorno.</span></div>
+                    <div class="flex items-start gap-3"><span class="text-brand-red font-bold text-xl">✔</span> <span><strong>Detección de factores de estancamiento</strong> que están frenando tu facturación.</span></div>
+                    <div class="flex items-start gap-3"><span class="text-brand-red font-bold text-xl">✔</span> <span><strong>Recomendaciones específicas</strong> quirúrgicas adaptadas a tu modelo.</span></div>
+                    <div class="flex items-start gap-3"><span class="text-brand-red font-bold text-xl">✔</span> <span><strong>Una hoja de ruta priorizada</strong> con los siguientes pasos sin rodeos.</span></div>
                 </div>
+                <p class="text-sm text-neutral-400 italic pt-2">
+                    "No se trata únicamente de encontrar problemas. Se trata de descubrir dónde están las oportunidades que hoy pueden generar un mayor impacto en tu negocio."
+                </p>
             </div>
         </div>
 
+        <!-- ¿Para quién es este servicio? -->
+        <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-8 content-relative" data-aos="fade-up">
+            <h2 class="font-black-title text-3xl uppercase text-center">Este servicio es para empresas que...</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-neutral-300 font-light">
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-2">
+                    <p class="font-bold text-brand-white text-lg">⚠️ Han dejado de crecer</p>
+                    <p class="text-sm text-neutral-400">Y aunque intentan de todo, no saben exactamente por qué están chocando contra un techo invisible.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-2">
+                    <p class="font-bold text-brand-white text-lg">💸 Invierten en marketing sin retorno</p>
+                    <p class="text-sm text-neutral-400">Gastan mensualmente en pauta, agencias o creadores sin obtener resultados comerciales consistentes.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-2">
+                    <p class="font-bold text-brand-white text-lg">🎯 Buscan validar sus decisiones</p>
+                    <p class="text-sm text-neutral-400">Quieren confirmar si el rumbo que están tomando es el correcto antes de comprometer más capital.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-2">
+                    <p class="font-bold text-brand-white text-lg">👁️ Valoran una visión externa objetiva</p>
+                    <p class="text-sm text-neutral-400">Buscan una mirada estratégica, dura e imparcial antes de seguir invirtiendo tiempo y dinero a ciegas.</p>
+                </div>
+            </div>
+            <p class="text-center font-bold text-xl text-brand-white pt-4">
+                Porque crecer no depende de hacer más cosas. <span class="text-brand-red">Depende de saber exactamente qué hacer.</span>
+            </p>
+        </div>
+
         <!-- Formulario Diagnóstico -->
-        <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-6 max-w-3xl mx-auto" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', freno: '' }">
-            <div class="space-y-2 text-center">
-                <h2 class="font-black-title text-3xl uppercase">Agendar Diagnóstico Estratégico</h2>
-                <p class="text-xs text-neutral-400 font-bold uppercase">100% virtual · 30 minutos · Sin powerpoints, sin relleno</p>
+        <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-8 max-w-3xl mx-auto content-relative" data-aos="fade-up">
+            <div class="space-y-3 text-center border-b border-brand-border pb-6">
+                <div class="inline-flex items-center gap-3 bg-brand-black border border-brand-red/40 px-6 py-2 rounded-full mb-2">
+                    <span class="text-neutral-500 line-through text-sm font-bold">VALORIZADO EN $150 USD</span>
+                    <span class="text-brand-red font-black text-lg">GRATIS AHORA</span>
+                </div>
+                <h2 class="font-black-title text-3xl sm:text-4xl uppercase">Agendar Diagnóstico Estratégico</h2>
+                <p class="text-xs text-neutral-400 font-bold uppercase tracking-widest">100% virtual · 30 minutos · Sin rellenos ni presentaciones de PowerPoint</p>
             </div>
 
             <form @submit.prevent="
@@ -625,196 +689,282 @@
                 if(SHEET_DIAGNOSTICO_URL) {
                     fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp, etapa, freno, servicio: 'Diagnóstico', fecha: new Date() }) });
                 }
-                const msg = `Hola Caleb, quiero agendar mi Diagnóstico Estratégico.\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nPrincipal freno: ${freno}`;
+                const msg = `Hola Caleb, quiero agendar mi Diagnóstico Estratégico Gratuito (Valor USD 150).\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nPrincipal freno: ${freno}`;
                 window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-            " class="space-y-4">
+            " class="space-y-5" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', freno: '' }">
                 <div>
                     <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre completo *</label>
-                    <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                    <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                 </div>
                 <div>
-                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre del negocio *</label>
-                    <input required x-model="negocio" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre de la empresa o marca *</label>
+                    <input required x-model="negocio" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Correo electrónico *</label>
-                        <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                        <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                     </div>
                     <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp *</label>
-                        <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp directo *</label>
+                        <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                     </div>
                 </div>
                 <div>
                     <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿En qué etapa está tu negocio? *</label>
-                    <select required x-model="etapa" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                    <select required x-model="etapa" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
                         <option value="">Selecciona una opción</option>
-                        <option value="Empezando">🌱 Empezando</option>
-                        <option value="En medio de todo">⚙️ En medio de todo</option>
-                        <option value="Escalando">🚀 Escalando</option>
+                        <option value="Empezando">🌱 Empezando — Validando idea o menos de 1 año</option>
+                        <option value="En medio de todo">⚙️ En medio de todo — Facturo pero avanzo sin sistema</option>
+                        <option value="Escalando">🚀 Escalando — Tengo tracción y busco aceleración</option>
                     </select>
                 </div>
                 <div>
                     <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿Cuál sientes que es tu principal freno hoy? *</label>
-                    <select required x-model="freno" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
+                    <select required x-model="freno" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
                         <option value="">Selecciona una opción</option>
-                        <option value="Branding">Branding</option>
-                        <option value="Contenido y comunicación">Contenido y comunicación</option>
-                        <option value="Ventas y proceso comercial">Ventas y proceso comercial</option>
-                        <option value="No lo tengo claro">No lo tengo claro, por eso quiero el diagnóstico</option>
+                        <option value="Branding">Branding / Posicionamiento de marca</option>
+                        <option value="Contenido y comunicación">Contenido, pauta y comunicación</option>
+                        <option value="Ventas y proceso comercial">Proceso comercial y cierres de venta</option>
+                        <option value="No lo tengo claro">No lo tengo claro, por eso requiero el diagnóstico</option>
                     </select>
                 </div>
                 <button type="submit" :disabled="loading" class="w-full bg-brand-red text-brand-white font-bold py-5 rounded-xl uppercase text-xs tracking-widest btn-glow-red">
-                    <span x-text="loading ? 'Enviando...' : 'Enviar y Reservar por WhatsApp'"></span>
+                    <span x-text="loading ? 'Enviando...' : 'Enviar y Agendar Diagnóstico por WhatsApp'"></span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- ==================== VISTA COMPLETA: /asesoria ==================== -->
-    <div x-show="currentView === 'asesoria'" class="py-20 px-6 max-w-6xl mx-auto space-y-16">
-        <!-- Encabezado -->
-        <div class="space-y-4 text-center max-w-4xl mx-auto">
-            <span class="text-neutral-400 font-bold text-xs uppercase tracking-widest bg-brand-smoke px-4 py-1.5 rounded-full border border-brand-border">Acompañamiento Continuo Directo</span>
+    <!-- ==================== VISTA COMPLETA Y ROBUSTA: /asesoria ==================== -->
+    <div x-show="currentView === 'asesoria'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper" style="display: none;">
+        <div class="glow-blob blob-1"></div>
+
+        <!-- Encabezado Robustecido -->
+        <div class="space-y-6 text-center max-w-4xl mx-auto content-relative" data-aos="fade-down">
+            <span class="text-neutral-400 font-bold text-xs uppercase tracking-widest bg-brand-smoke px-5 py-2 rounded-full border border-brand-border">Acompañamiento Estratégico 1 a 1</span>
             <h1 class="font-black-title text-4xl sm:text-6xl uppercase leading-tight">ASESORÍA PREMIUM DE CRECIMIENTO</h1>
             <p class="text-neutral-300 text-xl font-light max-w-3xl mx-auto leading-relaxed">Un acompañamiento estratégico para empresarios que quieren construir una empresa más sólida, rentable y preparada para crecer.</p>
         </div>
 
         <!-- Bloque 1: Introducción con Imagen 'privado.jpg' -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[380px]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
+            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[420px]" data-aos="fade-right">
                 <img :src="GITHUB_BASE_URL + 'privado.jpg'" alt="Sesión privada Caleb" class="w-full h-full object-cover">
             </div>
-            <div class="lg:col-span-7 p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-6">
+            <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-6" data-aos="fade-left">
                 <p class="text-lg text-neutral-300 font-light leading-relaxed">
-                    Dirigir una empresa implica tomar decisiones todos los días. Algunas se toman por intuición o con información incompleta.
+                    Dirigir una empresa implica tomar decisiones todos los días. Algunas son pequeñas. Otras pueden cambiar completamente el rumbo del negocio. El problema es que muchas veces esas decisiones se toman con información incompleta, por intuición o sin una estrategia clara detrás.
                 </p>
                 <div class="p-6 rounded-2xl bg-brand-smoke border-l-4 border-l-brand-red">
-                    <p class="font-bold text-brand-white text-lg">"Mi papel no es convertirme en un proveedor más. Es ser tu asesor estratégico para validar decisiones y reducir el margen de error."</p>
+                    <p class="font-bold text-brand-white text-lg">"La Asesoría Premium de Crecimiento nace precisamente para evitar eso. Mi papel no es convertirme en un proveedor más. Mi papel es convertirme en tu asesor estratégico."</p>
                 </div>
-                <p class="text-neutral-300 font-light">
-                    Analizamos juntos desde el lanzamiento de nuevos productos hasta el presupuesto de publicidad, contratación o expansión.
+                <p class="text-neutral-300 font-light leading-relaxed">
+                    Seré alguien con quien puedas analizar ideas, validar decisiones, cuestionar estrategias y construir un plan de crecimiento con una visión objetiva mucho más amplia.
                 </p>
             </div>
         </div>
 
-        <!-- Pilares de Trabajo -->
-        <div class="space-y-8">
-            <h2 class="font-black-title text-3xl sm:text-4xl uppercase text-center">¿Qué trabajaremos juntos?</h2>
+        <!-- ¿Qué trabajaremos juntos? ROBUSTO Y DETALLADO -->
+        <div class="space-y-8 content-relative">
+            <div class="text-center space-y-3" data-aos="fade-up">
+                <h2 class="font-black-title text-3xl sm:text-5xl uppercase">¿Qué trabajaremos juntos?</h2>
+                <p class="text-neutral-400 text-lg font-light max-w-2xl mx-auto">Cada empresa tiene retos diferentes. Por eso la asesoría se adapta completamente a tus objetivos y necesidades:</p>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-2">
-                    <h3 class="font-black-title text-xl uppercase text-brand-red">1. Estrategia de crecimiento</h3>
-                    <p class="text-neutral-300 text-sm font-light leading-relaxed">Definición de objetivos, priorización de proyectos, planeamiento estratégico, modelos de crecimiento y expansión.</p>
+                <!-- 1. Estrategia de crecimiento -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-black-title text-2xl uppercase text-brand-red">1. Estrategia de crecimiento</h3>
+                    <ul class="space-y-2 text-sm text-neutral-300 font-light">
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Definición clara de objetivos comerciales.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Priorización de proyectos de alto impacto.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Planeamiento estratégico de dirección.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Diseño de modelos de crecimiento escalables.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Estrategia de expansión de mercado.</li>
+                    </ul>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-2">
-                    <h3 class="font-black-title text-xl uppercase text-brand-red">2. Marketing estratégico</h3>
-                    <p class="text-neutral-300 text-sm font-light leading-relaxed">Posicionamiento, branding, comunicación, publicidad, contenido, embudos, automatización y conversión.</p>
+
+                <!-- 2. Marketing estratégico -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-black-title text-2xl uppercase text-brand-red">2. Marketing estratégico</h3>
+                    <ul class="space-y-2 text-sm text-neutral-300 font-light">
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Posicionamiento de marca para dominar tu nicho.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Branding e identidad visual de autoridad.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Comunicación comercial persuasiva.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Estrategia de publicidad, contenido y embudos.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Automatización y optimización de conversión.</li>
+                    </ul>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-2">
-                    <h3 class="font-black-title text-xl uppercase text-brand-red">3. Estrategia comercial</h3>
-                    <p class="text-neutral-300 text-sm font-light leading-relaxed">Optimización del proceso comercial, seguimiento, conversión, ticket promedio, retención y experiencia de compra.</p>
+
+                <!-- 3. Estrategia comercial -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-black-title text-2xl uppercase text-brand-red">3. Estrategia comercial</h3>
+                    <ul class="space-y-2 text-sm text-neutral-300 font-light">
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Optimización del flujo y proceso comercial.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Métodos de seguimiento y aumento de conversión.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Estrategias para elevar el ticket promedio.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Programas de retención de clientes.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Perfeccionamiento de la experiencia de compra.</li>
+                    </ul>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-2">
-                    <h3 class="font-black-title text-xl uppercase text-brand-red">4. Optimización del negocio</h3>
-                    <p class="text-neutral-300 text-sm font-light leading-relaxed">Procesos, escalabilidad, delegación, organización, automatización, indicadores y productividad.</p>
+
+                <!-- 4. Optimización del negocio -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="font-black-title text-2xl uppercase text-brand-red">4. Optimización del negocio</h3>
+                    <ul class="space-y-2 text-sm text-neutral-300 font-light">
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Estandarización de procesos operativos.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Arquitectura para la escalabilidad real.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Esquemas de delegación efectiva y organización.</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Implementación de indicadores (KPIs).</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-red font-bold">•</span> Aumento de la productividad corporativa.</li>
+                    </ul>
                 </div>
-                <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border space-y-2 md:col-span-2">
-                    <h3 class="font-black-title text-xl uppercase text-brand-red">5. Toma de decisiones estratégica</h3>
-                    <p class="text-neutral-300 text-sm font-light leading-relaxed">Evaluación previa de decisiones importantes antes de ejecutarlas para aumentar la probabilidad de éxito.</p>
+
+                <!-- 5. Toma de decisiones -->
+                <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4 md:col-span-2" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="font-black-title text-2xl uppercase text-brand-red">5. Toma de decisiones estratégica</h3>
+                    <p class="text-neutral-300 text-sm font-light leading-relaxed">
+                        Analizaremos juntos las decisiones importantes antes de ejecutarlas: desde una nueva campaña publicitaria hasta el lanzamiento de un producto, la contratación de personal clave o la expansión física/digital de la empresa. El objetivo es reducir drásticamente el margen de error y aumentar la probabilidad de éxito.
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Bloque 2: Formulario de Asesoría acompañado de la Imagen 'consultoria.jpeg' -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[480px] lg:sticky lg:top-28">
+        <!-- ¿Qué incluye la asesoría? -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
+            <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-smoke border border-brand-border space-y-6" data-aos="fade-right">
+                <h3 class="font-black-title text-3xl uppercase">¿Qué incluye la Asesoría Premium?</h3>
+                <div class="space-y-3 text-neutral-300 font-light text-base">
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Sesiones estratégicas periódicas 1 a 1 conmigo.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Acompañamiento personalizado y directo.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Resolución de dudas operativas y comerciales.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Revisión y auditoría constante de estrategias.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Feedback objetivo sobre campañas, proyectos y contrataciones.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Supervisión estratégica continua cuando sea necesario.</div>
+                    <div class="flex items-center gap-3"><span class="text-brand-red font-bold text-xl">✔</span> Recomendaciones continuas orientadas a rentabilidad.</div>
+                </div>
+            </div>
+            <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[420px]" data-aos="fade-left">
                 <img :src="GITHUB_BASE_URL + 'consultoria.jpeg'" alt="Consultoría Caleb" class="w-full h-full object-cover">
             </div>
-            
-            <div class="lg:col-span-7 bg-brand-darkCard p-8 sm:p-10 rounded-3xl border border-brand-border shadow-2xl space-y-6" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', ingresos: '', freno: '' }">
-                <div class="space-y-2">
-                    <h2 class="font-black-title text-3xl uppercase">Solicitar Asesoría Premium</h2>
-                    <p class="text-xs text-neutral-400 font-bold uppercase">Acompañamiento directo 1 a 1</p>
+        </div>
+
+        <!-- ¿Para quién es esta Asesoría? -->
+        <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-8 content-relative" data-aos="fade-up">
+            <h2 class="font-black-title text-3xl uppercase text-center">Este servicio es para empresarios que...</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-neutral-300 font-light">
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-1">
+                    <p class="font-bold text-brand-white text-lg">🚫 Quieren dejar de improvisar</p>
+                    <p class="text-sm text-neutral-400">Están cansados de gestionar la empresa basándose en corazonadas o modas de internet.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-1">
+                    <p class="font-bold text-brand-white text-lg">🧠 Necesitan una segunda opinión estratégica</p>
+                    <p class="text-sm text-neutral-400">Valoran consultar con un experto externo antes de arriesgar presupuesto en decisiones clave.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-1">
+                    <p class="font-bold text-brand-white text-lg">🚀 Buscan acelerar el crecimiento</p>
+                    <p class="text-sm text-neutral-400">Quieren recortar la curva de aprendizaje y evitar errores costosos que otros ya cometieron.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-smoke border border-brand-border space-y-1">
+                    <p class="font-bold text-brand-white text-lg">🏛️ Buscan un negocio sostenible</p>
+                    <p class="text-sm text-neutral-400">No buscan un chispazo de ventas, sino una estructura sólida capaz de durar años en el mercado.</p>
+                </div>
+            </div>
+            <div class="p-6 rounded-2xl bg-brand-smoke border-l-4 border-l-brand-red text-center space-y-2 max-w-3xl mx-auto">
+                <p class="font-bold text-xl text-brand-white">
+                    "La diferencia entre tener una empresa que reacciona y una empresa que crece está en la calidad de las decisiones que toma."
+                </p>
+                <p class="text-sm text-neutral-400 font-light">
+                    Mi trabajo es ayudarte a que esas decisiones sean más claras, más estratégicas y estén alineadas con los objetivos que realmente quieres alcanzar.
+                </p>
+            </div>
+        </div>
+
+        <!-- Formulario Asesoría Premium -->
+        <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-8 max-w-3xl mx-auto content-relative" data-aos="fade-up" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', ingresos: '', freno: '' }">
+            <div class="space-y-2 text-center border-b border-brand-border pb-6">
+                <h2 class="font-black-title text-3xl sm:text-4xl uppercase">Solicitar Asesoría Premium</h2>
+                <p class="text-xs text-brand-red font-bold uppercase tracking-widest">Acompañamiento directo 1 a 1 con Caleb De La Piedra</p>
+            </div>
+
+            <form @submit.prevent="
+                loading = true;
+                if(SHEET_DIAGNOSTICO_URL) {
+                    fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp, etapa, ingresos, freno, servicio: 'Asesoría Premium', fecha: new Date() }) });
+                }
+                const msg = `Hola Caleb, quiero solicitar la Asesoría Premium de Crecimiento.\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nIngresos mensuales: ${ingresos}\nPrincipal freno: ${freno}`;
+                window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+            " class="space-y-5">
+                <div>
+                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre completo *</label>
+                    <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                </div>
+                <div>
+                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre del negocio *</label>
+                    <input required x-model="negocio" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Correo electrónico *</label>
+                        <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                    </div>
+                    <div>
+                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp *</label>
+                        <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿En qué etapa está tu negocio? *</label>
+                    <select required x-model="etapa" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Empezando">🌱 Empezando — Llevo menos de 1 año</option>
+                        <option value="En medio de todo">⚙️ En medio de todo — Facturo sin sistema claro</option>
+                        <option value="Escalando">🚀 Escalando — Busco consolidación e hitos mayores</option>
+                    </select>
                 </div>
 
-                <form @submit.prevent="
-                    loading = true;
-                    if(SHEET_DIAGNOSTICO_URL) {
-                        fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp, etapa, ingresos, freno, servicio: 'Asesoría Premium', fecha: new Date() }) });
-                    }
-                    const msg = `Hola Caleb, quiero solicitar la Asesoría Premium de Crecimiento.\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nIngresos mensuales: ${ingresos}\nPrincipal freno: ${freno}`;
-                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-                " class="space-y-4">
-                    <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre completo *</label>
-                        <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                    </div>
-                    <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre del negocio *</label>
-                        <input required x-model="negocio" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Correo electrónico *</label>
-                            <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                        </div>
-                        <div>
-                            <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp *</label>
-                            <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿En qué etapa está tu negocio? *</label>
-                        <select required x-model="etapa" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                            <option value="">Selecciona una opción</option>
-                            <option value="Empezando">🌱 Empezando</option>
-                            <option value="En medio de todo">⚙️ En medio de todo</option>
-                            <option value="Escalando">🚀 Escalando</option>
-                        </select>
-                    </div>
+                <!-- CAMPO EXCLUSIVO INGRESOS -->
+                <div>
+                    <label class="text-xs uppercase font-bold text-brand-red block mb-1">¿Cuál es tu rango de facturación / ingresos mensuales promedio? *</label>
+                    <select required x-model="ingresos" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
+                        <option value="">Selecciona un rango de ingresos</option>
+                        <option value="Menos de USD 3,000 / mes">Menos de USD 3,000 / mes</option>
+                        <option value="USD 3,000 – USD 10,000 / mes">USD 3,000 – USD 10,000 / mes</option>
+                        <option value="USD 10,000 – USD 30,000 / mes">USD 10,000 – USD 30,000 / mes</option>
+                        <option value="Más de USD 30,000 / mes">Más de USD 30,000 / mes</option>
+                    </select>
+                </div>
 
-                    <!-- CAMPO EXCLUSIVO DE RANGO DE INGRESOS/FACTURACIÓN -->
-                    <div>
-                        <label class="text-xs uppercase font-bold text-brand-red block mb-1">¿Cuál es tu rango de facturación / ingresos mensuales promedio? *</label>
-                        <select required x-model="ingresos" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red font-medium">
-                            <option value="">Selecciona un rango de ingresos</option>
-                            <option value="Menos de USD 3,000 / mes">Menos de USD 3,000 / mes</option>
-                            <option value="USD 3,000 – USD 10,000 / mes">USD 3,000 – USD 10,000 / mes</option>
-                            <option value="USD 10,000 – USD 30,000 / mes">USD 10,000 – USD 30,000 / mes</option>
-                            <option value="Más de USD 30,000 / mes">Más de USD 30,000 / mes</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿Cuál sientes que es tu principal freno hoy? *</label>
-                        <select required x-model="freno" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3 text-brand-white focus:outline-none focus:border-brand-red">
-                            <option value="">Selecciona una opción</option>
-                            <option value="Branding">Branding</option>
-                            <option value="Contenido y comunicación">Contenido y comunicación</option>
-                            <option value="Ventas y proceso comercial">Ventas y proceso comercial</option>
-                            <option value="No lo tengo claro">No lo tengo claro, por eso quiero la asesoría</option>
-                        </select>
-                    </div>
-                    <button type="submit" :disabled="loading" class="w-full bg-brand-red text-brand-white font-bold py-5 rounded-xl uppercase text-xs tracking-widest btn-glow-red">
-                        <span x-text="loading ? 'Enviando...' : 'Solicitar Asesoría por WhatsApp'"></span>
-                    </button>
-                </form>
-            </div>
+                <div>
+                    <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">¿Cuál sientes que es tu principal freno hoy? *</label>
+                    <select required x-model="freno" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Branding">Branding / Posicionamiento</option>
+                        <option value="Contenido y comunicación">Contenido y comunicación</option>
+                        <option value="Ventas y proceso comercial">Ventas y proceso comercial</option>
+                        <option value="No lo tengo claro">No lo tengo claro, por eso quiero la asesoría</option>
+                    </select>
+                </div>
+                <button type="submit" :disabled="loading" class="w-full bg-brand-red text-brand-white font-bold py-5 rounded-xl uppercase text-xs tracking-widest btn-glow-red">
+                    <span x-text="loading ? 'Enviando...' : 'Solicitar Asesoría Premium por WhatsApp'"></span>
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- ==================== VISTA COMPLETA Y LIBRE: /contacto ==================== -->
-    <div x-show="currentView === 'contacto'" class="py-20 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start" x-data="{ loading: false, nombre: '', empresa: '', whatsapp: '', correo: '', etapa: '', motivo: '', mensaje: '' }">
+    <!-- ==================== VISTA COMPLETA: /contacto ==================== -->
+    <div x-show="currentView === 'contacto'" class="py-24 px-6 max-w-7xl mx-auto bg-animated-wrapper" style="display: none;">
+        <div class="glow-blob blob-2"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start content-relative" x-data="{ loading: false, nombre: '', empresa: '', whatsapp: '', correo: '', etapa: '', motivo: '', mensaje: '' }">
             
-            <!-- Columna Izquierda: Mensaje y Canales Directos -->
-            <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
-                <div class="space-y-4">
+            <div class="lg:col-span-5 space-y-10 lg:sticky lg:top-28" data-aos="fade-right">
+                <div class="space-y-6">
                     <span class="text-brand-red font-bold text-xs uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/20">
                         Contacto Directo
                     </span>
-                    <h1 class="font-black-title text-4xl sm:text-6xl uppercase leading-none">
+                    <h1 class="font-black-title text-4xl sm:text-6xl uppercase leading-[0.95]">
                         Cuéntame en qué punto estás. <br>
                         <span class="text-brand-red">Lo demás lo resolvemos hablando.</span>
                     </h1>
@@ -823,101 +973,122 @@
                     </p>
                 </div>
 
-                <div class="space-y-4 pt-4 border-t border-brand-border">
-                    <p class="text-xs font-bold uppercase tracking-widest text-neutral-400">Acceso Inmediato</p>
+                <div class="space-y-4 pt-6 border-t border-brand-border">
+                    <p class="text-xs font-bold uppercase tracking-widest text-brand-red">Líneas Directas</p>
                     
-                    <a :href="`https://wa.me/${WHATSAPP_NUMBER}`" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all group">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center font-bold">
+                    <a :href="`https://wa.me/${WHATSAPP_NUMBER}`" target="_blank" class="flex items-center gap-5 p-5 rounded-2xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-smoke border border-brand-border text-brand-red flex items-center justify-center font-bold text-xl group-hover:bg-brand-red/10 transition-colors">
                             💬
                         </div>
                         <div>
-                            <p class="text-xs uppercase font-bold text-neutral-400">WhatsApp Directo</p>
-                            <p class="text-sm font-bold text-brand-white group-hover:text-brand-red transition-colors">Hablar por WhatsApp ahora</p>
+                            <p class="text-[10px] uppercase font-black text-neutral-500 tracking-wider">WhatsApp Directo</p>
+                            <p class="text-base font-bold text-brand-white group-hover:text-brand-red transition-colors">Hablar por WhatsApp ahora</p>
                         </div>
                     </a>
 
-                    <a href="mailto:calebdelapiedra@gmail.com" class="flex items-center gap-4 p-4 rounded-2xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all group">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center font-bold">
+                    <a href="mailto:calebdelapiedra@gmail.com" class="flex items-center gap-5 p-5 rounded-2xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-smoke border border-brand-border text-brand-red flex items-center justify-center font-bold text-xl group-hover:bg-brand-red/10 transition-colors">
                             ✉️
                         </div>
                         <div>
-                            <p class="text-xs uppercase font-bold text-neutral-400">Correo Electrónico</p>
-                            <p class="text-sm font-bold text-brand-white group-hover:text-brand-red transition-colors">calebdelapiedra@gmail.com</p>
+                            <p class="text-[10px] uppercase font-black text-neutral-500 tracking-wider">Correo Electrónico</p>
+                            <p class="text-base font-bold text-brand-white group-hover:text-brand-red transition-colors">calebdelapiedra@gmail.com</p>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- Columna Derecha: Formulario Abierto e Integrado -->
-            <div class="lg:col-span-7 space-y-6">
-                <form @submit.prevent="
-                    loading = true;
-                    if(SHEET_CONTACTO_URL) {
-                        fetch(SHEET_CONTACTO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, empresa, whatsapp, correo, etapa, motivo, mensaje, fecha: new Date() }) });
-                    }
-                    const msg = `Hola Caleb, soy ${nombre} (${correo}) de ${empresa}.\nEtapa del negocio: ${etapa}\nMotivo: ${motivo}\nMensaje: ${mensaje}`;
-                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-                " class="space-y-6">
+            <div class="lg:col-span-7 space-y-6" data-aos="fade-left">
+                <div class="bg-brand-darkCard p-8 sm:p-10 rounded-3xl border border-brand-border shadow-2xl">
+                    <form @submit.prevent="
+                        loading = true;
+                        if(SHEET_CONTACTO_URL) {
+                            fetch(SHEET_CONTACTO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, empresa, whatsapp, correo, etapa, motivo, mensaje, fecha: new Date() }) });
+                        }
+                        const msg = `Hola Caleb, soy ${nombre} (${correo}) de ${empresa}.\nEtapa: ${etapa}\nMotivo: ${motivo}\nMensaje: ${mensaje}`;
+                        window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+                    " class="space-y-6">
 
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">Nombre completo *</label>
-                        <input required x-model="nombre" type="text" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">Nombre de la empresa / marca *</label>
-                        <input required x-model="empresa" type="text" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">Correo electrónico *</label>
-                            <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
+                            <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Nombre completo *</label>
+                            <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
                         </div>
+
                         <div class="space-y-2">
-                            <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">WhatsApp *</label>
-                            <input required x-model="whatsapp" type="tel" placeholder="+1 999 999 999" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
+                            <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Nombre de la empresa / marca *</label>
+                            <input required x-model="empresa" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
                         </div>
-                    </div>
 
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">¿En qué etapa está tu negocio? *</label>
-                        <select required x-model="etapa" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
-                            <option value="">Selecciona una opción</option>
-                            <option value="Empezando">🌱 Empezando — Recién estoy validando la idea o llevo menos de 1 año</option>
-                            <option value="En medio de todo">⚙️ En medio de todo — Ya facturo, pero siento que avanzo sin sistema</option>
-                            <option value="Escalando">🚀 Escalando — Tengo tracción y necesito estructura para crecer más rápido</option>
-                        </select>
-                    </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Correo electrónico *</label>
+                                <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">WhatsApp *</label>
+                                <input required x-model="whatsapp" type="tel" placeholder="+51 999 999 999" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
+                            </div>
+                        </div>
 
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">¿Qué te trae por aquí? *</label>
-                        <select required x-model="motivo" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none">
-                            <option value="">Selecciona una opción</option>
-                            <option value="Diagnóstico Estratégico">Diagnóstico Estratégico</option>
-                            <option value="Asesoría Premium">Asesoría Premium</option>
-                            <option value="Nómade Brand Booster">Nómade Brand Booster</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">¿En qué etapa está tu negocio? *</label>
+                            <select required x-model="etapa" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none font-medium transition-colors">
+                                <option value="">Selecciona una opción</option>
+                                <option value="Empezando">🌱 Empezando — Recién estoy validando la idea o llevo menos de 1 año</option>
+                                <option value="En medio de todo">⚙️ En medio de todo — Ya facturo, pero siento que avanzo sin sistema</option>
+                                <option value="Escalando">🚀 Escalando — Tengo tracción y necesito estructura para crecer más rápido</option>
+                            </select>
+                        </div>
 
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase font-bold tracking-wider text-neutral-300 block">Cuéntame brevemente qué necesitas (Opcional, máx 300 caracteres)</label>
-                        <textarea x-model="mensaje" maxlength="300" rows="4" class="w-full bg-brand-darkCard border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none"></textarea>
-                    </div>
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">¿Qué te trae por aquí? *</label>
+                            <select required x-model="motivo" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none font-medium transition-colors">
+                                <option value="">Selecciona una opción</option>
+                                <option value="Diagnóstico Estratégico">Diagnóstico Estratégico</option>
+                                <option value="Asesoría Premium">Asesoría Premium</option>
+                                <option value="Nómade Brand Booster">Nómade Brand Booster</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
 
-                    <button type="submit" :disabled="loading" class="w-full bg-brand-red text-brand-white font-bold py-5 rounded-xl text-xs uppercase tracking-widest btn-glow-red">
-                        <span x-text="loading ? 'Enviando...' : 'Enviar y hablar por WhatsApp'"></span>
-                    </button>
-                </form>
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Cuéntame brevemente qué necesitas (Opcional, máx 300 caracteres)</label>
+                            <textarea x-model="mensaje" maxlength="300" rows="3" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors"></textarea>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" :disabled="loading" class="w-full bg-brand-red text-brand-white font-black py-6 rounded-xl text-xs uppercase tracking-widest btn-glow-red flex items-center justify-center gap-2">
+                                <span x-text="loading ? 'Enviando...' : 'Enviar y hablar por WhatsApp'"></span>
+                                <span x-show="!loading">→</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- FOOTER GENERAL -->
-    <footer class="py-12 px-6 bg-brand-black border-t border-brand-border text-center text-xs font-semibold text-neutral-500 uppercase tracking-widest">
-        <p>© Caleb De La Piedra — Todos los derechos reservados.</p>
+    <footer class="py-12 px-6 bg-brand-black border-t border-brand-border text-center text-xs font-semibold text-neutral-500 uppercase tracking-widest relative z-50">
+        <p>© Caleb De La Piedra — Asesoría de Negocios y Marketing Estratégico.</p>
     </footer>
 
+    <!-- AOS ANIMATIONS INITIALIZATION -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+
+        document.addEventListener('alpine:initialized', () => {
+            Alpine.effect(() => {
+                const view = Alpine.store('currentView');
+                setTimeout(() => AOS.refresh(), 100);
+            });
+        });
+    </script>
 </body>
 </html>
