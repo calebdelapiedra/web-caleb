@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,12 +37,13 @@
         }
     </script>
     <style>
-        body {
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden !important;
             font-family: 'Inter', sans-serif;
             background-color: #050505;
             color: #FFFFFF;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
         .font-black-title {
             font-weight: 900;
@@ -68,24 +69,25 @@
         }
         .logo-white-filter:hover { opacity: 1; }
 
-        /* FONDOS ANIMADOS */
-        .bg-animated-wrapper { position: relative; overflow: hidden; }
+        /* FONDOS ANIMADOS SIN OVERFLOW */
+        .bg-animated-wrapper { position: relative; overflow: hidden; width: 100%; }
         .glow-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none; opacity: 0.4;
+            position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none; opacity: 0.35;
             animation: float 12s infinite ease-in-out alternate;
+            max-width: 100%;
         }
-        .blob-1 { width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(227,6,19,0.15) 0%, rgba(0,0,0,0) 70%); top: -10%; left: -10%; }
-        .blob-2 { width: 30vw; height: 30vw; background: radial-gradient(circle, rgba(50,50,50,0.3) 0%, rgba(0,0,0,0) 70%); bottom: -10%; right: -10%; animation-delay: -5s; }
-        .blob-3 { width: 25vw; height: 25vw; background: radial-gradient(circle, rgba(227,6,19,0.1) 0%, rgba(0,0,0,0) 70%); top: 40%; left: 60%; animation-duration: 15s; }
+        .blob-1 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(227,6,19,0.2) 0%, rgba(0,0,0,0) 70%); top: -5%; left: -5%; }
+        .blob-2 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(60,60,60,0.4) 0%, rgba(0,0,0,0) 70%); bottom: -5%; right: -5%; animation-delay: -5s; }
+        .blob-3 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(227,6,19,0.15) 0%, rgba(0,0,0,0) 70%); top: 40%; right: 5%; animation-duration: 15s; }
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(5vw, 5vh) scale(1.1); }
-            100% { transform: translate(-5vw, 10vh) scale(0.9); }
+            50% { transform: translate(20px, 20px) scale(1.05); }
+            100% { transform: translate(-20px, 30px) scale(0.95); }
         }
         .content-relative { position: relative; z-index: 10; }
     </style>
 </head>
-<body class="bg-brand-black text-brand-white selection:bg-brand-red selection:text-brand-white" x-data="{ currentView: 'home', mobileMenu: false }">
+<body class="bg-brand-black text-brand-white selection:bg-brand-red selection:text-brand-white overflow-x-hidden" x-data="{ currentView: 'home', mobileMenu: false }">
 
     <!-- CONFIGURACIÓN GLOBAL -->
     <script>
@@ -101,6 +103,13 @@
             tiktok: "https://www.tiktok.com/@calebdelapiedra",
             linkedin: "https://www.linkedin.com/in/calebdelapiedra/"
         };
+
+        // Función utilitaria para limpiar números telefónicos
+        function formatearWhatsApp(codigo, numero) {
+            const numLimpio = numero.replace(/\D/g, '');
+            const codLimpio = codigo.replace(/\D/g, '');
+            return codLimpio + numLimpio;
+        }
     </script>
 
     <!-- NAVEGACIÓN -->
@@ -144,15 +153,13 @@
 
     <!-- ==================== VISTA: HOME ==================== -->
     <div x-show="currentView === 'home'">
-        
-        <!-- SECCIÓN 01 — HERO DIRECTO EXACTO -->
-        <section id="inicio" class="bg-animated-wrapper relative min-h-[85vh] flex items-center pt-12 pb-20 px-6 border-b border-brand-border">
+        <section id="inicio" class="bg-animated-wrapper relative min-h-[85vh] flex items-center pt-12 pb-20 px-6 border-b border-brand-border overflow-hidden">
             <div class="glow-blob blob-1"></div>
             <div class="glow-blob blob-2"></div>
             
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 content-relative">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 content-relative w-full">
                 <div class="lg:col-span-7 space-y-8">
-                    <h1 class="font-black-title text-5xl sm:text-7xl uppercase leading-[0.95] tracking-tight" data-aos="fade-up">
+                    <h1 class="font-black-title text-4xl sm:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tight" data-aos="fade-up">
                         Tu empresa no tiene un problema de marketing. <br>
                         <span class="text-brand-red">Tiene un problema de decisiones.</span>
                     </h1>
@@ -185,11 +192,10 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 01.5 — PRESENTACIÓN Y REDES -->
-        <section class="py-24 px-6 bg-brand-smoke border-b border-brand-border bg-animated-wrapper">
+        <section class="py-24 px-6 bg-brand-smoke border-b border-brand-border bg-animated-wrapper overflow-hidden">
             <div class="glow-blob blob-3"></div>
             
-            <div class="max-w-5xl mx-auto text-center space-y-10 content-relative">
+            <div class="max-w-5xl mx-auto text-center space-y-10 content-relative w-full">
                 <div class="space-y-6" data-aos="fade-up">
                     <p class="text-2xl sm:text-4xl text-neutral-300 font-light leading-relaxed max-w-4xl mx-auto">
                         Soy <strong class="text-brand-white font-black">Caleb De La Piedra</strong>. Probablemente el <strong class="text-brand-white">mejor asesor de marketing y negocios</strong> que vas a encontrar si estás harto de pagar por likes que no pagan tus facturas. Llevo 15 años viendo a "CEOs" quemar presupuestos enteros buscando agradarle al algoritmo.
@@ -201,7 +207,6 @@
                     </div>
                 </div>
 
-                <!-- Redes -->
                 <div class="pt-8 space-y-5" data-aos="fade-up" data-aos-delay="300">
                     <p class="text-xs font-bold uppercase tracking-widest text-brand-red">Conecta conmigo en redes</p>
                     <div class="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
@@ -226,7 +231,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 02 — EL PROBLEMA -->
         <section class="py-28 px-6 bg-brand-black border-b border-brand-border">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5 order-2 lg:order-1" data-aos="fade-right">
@@ -250,7 +254,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 03 — CÓMO TRABAJO -->
         <section class="py-28 px-6 max-w-5xl mx-auto text-center space-y-10 border-b border-brand-border" data-aos="fade-up">
             <span class="bg-brand-red/10 text-brand-red border border-brand-red/20 font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
                 La Realidad Incomoda
@@ -268,7 +271,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 04 — POWER 3 -->
         <section id="power-3" class="py-28 px-6 bg-brand-white text-brand-black border-b border-brand-border relative overflow-hidden">
             <div class="max-w-7xl mx-auto space-y-16 relative z-10">
                 <div class="text-center space-y-6 max-w-3xl mx-auto" data-aos="fade-up">
@@ -285,7 +287,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- PASO 1 -->
                     <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
                         <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">01</div>
                         <div class="space-y-4 relative z-10">
@@ -301,7 +302,6 @@
                         </div>
                     </div>
 
-                    <!-- PASO 2 -->
                     <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
                         <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">02</div>
                         <div class="space-y-4 relative z-10">
@@ -317,7 +317,6 @@
                         </div>
                     </div>
 
-                    <!-- PASO 3 -->
                     <div class="p-8 rounded-3xl bg-neutral-100 border border-neutral-300 space-y-5 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
                         <div class="absolute top-4 right-6 text-7xl font-black text-neutral-200/50 select-none group-hover:text-brand-red/20 transition-colors">03</div>
                         <div class="space-y-4 relative z-10">
@@ -347,8 +346,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 05 — SERVICIOS RESUMIDOS DE PORTADA -->
-        <section id="asesoria" class="py-28 px-6 max-w-7xl mx-auto space-y-16 border-b border-brand-border bg-animated-wrapper">
+        <section id="asesoria" class="py-28 px-6 max-w-7xl mx-auto space-y-16 border-b border-brand-border bg-animated-wrapper overflow-hidden">
             <div class="glow-blob blob-2"></div>
             <h2 class="font-black-title text-4xl sm:text-6xl uppercase text-center content-relative" data-aos="fade-up">
                 Dos caminos. <br><span class="text-brand-red">Ninguno es "pensarlo un poco más".</span>
@@ -389,7 +387,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 06 — CREDIBILIDAD -->
         <section class="py-24 px-6 bg-brand-smoke border-b border-brand-border">
             <div class="max-w-7xl mx-auto space-y-12">
                 <div class="max-w-3xl space-y-6" data-aos="fade-up">
@@ -419,7 +416,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 07 — NÓMADE -->
         <section id="nomade" class="relative py-28 px-6 overflow-hidden border-b border-brand-border bg-brand-black">
             <div class="nomade-video-container">
                 <video autoplay loop muted playsinline class="nomade-video-element opacity-40">
@@ -450,7 +446,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 08 — IDEAS PARA EMPRESARIOS -->
         <section id="ideas" class="py-28 px-6 bg-brand-smoke border-b border-brand-border">
             <div class="max-w-7xl mx-auto space-y-12">
                 <h2 class="font-black-title text-4xl sm:text-5xl uppercase text-center" data-aos="fade-up">
@@ -506,7 +501,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 09 — CTA FINAL -->
         <section class="py-28 px-6 max-w-6xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-8" data-aos="fade-right">
@@ -536,10 +530,9 @@
     </div>
 
     <!-- ==================== VISTA COMPLETA Y REDISEÑADA: /diagnostico ==================== -->
-    <div x-show="currentView === 'diagnostico'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper" style="display: none;">
+    <div x-show="currentView === 'diagnostico'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper overflow-hidden" style="display: none;">
         <div class="glow-blob blob-3"></div>
 
-        <!-- Encabezado con Destacado Especial -->
         <div class="space-y-6 text-center max-w-4xl mx-auto content-relative" data-aos="fade-down">
             <div class="inline-flex items-center gap-2 bg-brand-red text-brand-white font-black text-xs uppercase px-5 py-2.5 rounded-full tracking-wider btn-glow-red animate-pulse">
                 <span>🔥 VALORADO EN $150 USD — GRATIS AHORA</span>
@@ -548,7 +541,6 @@
             <p class="text-neutral-300 text-xl font-light max-w-3xl mx-auto leading-relaxed">Descubre qué está frenando el crecimiento de tu empresa y qué deberías hacer para llevarla al siguiente nivel.</p>
         </div>
 
-        <!-- Bloque 1: Introducción Sarcástica con Imagen 'consultoria2.png' -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
             <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-6" data-aos="fade-right">
                 <p class="text-lg text-neutral-300 font-light leading-relaxed">
@@ -572,7 +564,6 @@
             </div>
         </div>
 
-        <!-- ¿Qué analizaremos? DESARROLLO COMPLETO PALABRA POR PALABRA -->
         <div class="space-y-8 content-relative">
             <div class="text-center space-y-3" data-aos="fade-up">
                 <h2 class="font-black-title text-3xl sm:text-5xl uppercase">¿Qué analizaremos en la sesión?</h2>
@@ -580,7 +571,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- 1. Estrategia de negocio -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="100">
                     <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">01 / Negocio</span>
                     <h3 class="font-black-title text-2xl uppercase">Estrategia de negocio</h3>
@@ -589,7 +579,6 @@
                     </p>
                 </div>
 
-                <!-- 2. Marketing y posicionamiento -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="200">
                     <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">02 / Marca</span>
                     <h3 class="font-black-title text-2xl uppercase">Marketing y posicionamiento</h3>
@@ -598,7 +587,6 @@
                     </p>
                 </div>
 
-                <!-- 3. Proceso comercial -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="300">
                     <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">03 / Ventas</span>
                     <h3 class="font-black-title text-2xl uppercase">Proceso comercial</h3>
@@ -607,7 +595,6 @@
                     </p>
                 </div>
 
-                <!-- 4. Experiencia del cliente -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3" data-aos="zoom-in" data-aos-delay="400">
                     <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">04 / Clientes</span>
                     <h3 class="font-black-title text-2xl uppercase">Experiencia del cliente</h3>
@@ -616,7 +603,6 @@
                     </p>
                 </div>
 
-                <!-- 5. Operación y crecimiento -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border hover:border-brand-red transition-all space-y-3 md:col-span-2" data-aos="zoom-in" data-aos-delay="500">
                     <span class="text-brand-red font-black text-xs uppercase tracking-widest bg-brand-red/10 px-3 py-1 rounded-md">05 / Escala</span>
                     <h3 class="font-black-title text-2xl uppercase">Operación y crecimiento</h3>
@@ -627,7 +613,6 @@
             </div>
         </div>
 
-        <!-- Bloque 2: Entregables con Imagen 'consultoria3.webp' -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
             <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[380px] order-2 lg:order-1" data-aos="fade-right">
                 <img :src="GITHUB_BASE_URL + 'consultoria3.webp'" alt="Consultoría Caleb 3" class="w-full h-full object-cover">
@@ -647,7 +632,6 @@
             </div>
         </div>
 
-        <!-- ¿Para quién es este servicio? -->
         <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-8 content-relative" data-aos="fade-up">
             <h2 class="font-black-title text-3xl uppercase text-center">Este servicio es para empresas que...</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-neutral-300 font-light">
@@ -673,7 +657,7 @@
             </p>
         </div>
 
-        <!-- Formulario Diagnóstico -->
+        <!-- FORMULARIO DIAGNÓSTICO CON SELECTOR DE PAÍS CONECTADO A WHATSAPP -->
         <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-8 max-w-3xl mx-auto content-relative" data-aos="fade-up">
             <div class="space-y-3 text-center border-b border-brand-border pb-6">
                 <div class="inline-flex items-center gap-3 bg-brand-black border border-brand-red/40 px-6 py-2 rounded-full mb-2">
@@ -686,12 +670,13 @@
 
             <form @submit.prevent="
                 loading = true;
+                const waCompleto = formatearWhatsApp(codigoPais, whatsapp);
                 if(SHEET_DIAGNOSTICO_URL) {
-                    fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp, etapa, freno, servicio: 'Diagnóstico', fecha: new Date() }) });
+                    fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp: waCompleto, etapa, freno, servicio: 'Diagnóstico', fecha: new Date() }) });
                 }
                 const msg = `Hola Caleb, quiero agendar mi Diagnóstico Estratégico Gratuito (Valor USD 150).\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nPrincipal freno: ${freno}`;
                 window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-            " class="space-y-5" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', freno: '' }">
+            " class="space-y-5" x-data="{ loading: false, nombre: '', negocio: '', correo: '', codigoPais: '+51', whatsapp: '', etapa: '', freno: '' }">
                 <div>
                     <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Nombre completo *</label>
                     <input required x-model="nombre" type="text" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
@@ -705,9 +690,26 @@
                         <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Correo electrónico *</label>
                         <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                     </div>
+                    
+                    <!-- SELECTOR DE PAÍS + WHATSAPP -->
                     <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp directo *</label>
-                        <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp con País *</label>
+                        <div class="flex gap-2">
+                            <select x-model="codigoPais" class="w-28 bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-xs text-brand-white focus:outline-none focus:border-brand-red font-bold">
+                                <option value="+51">🇵🇪 +51</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+57">🇨🇴 +57</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+54">🇦🇷 +54</option>
+                                <option value="+56">🇨🇱 +56</option>
+                                <option value="+593">🇪🇨 +593</option>
+                                <option value="+591">🇧🇴 +591</option>
+                                <option value="+502">🇬🇹 +502</option>
+                                <option value="+506">🇨🇷 +506</option>
+                            </select>
+                            <input required x-model="whatsapp" type="tel" placeholder="999 999 999" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -737,17 +739,15 @@
     </div>
 
     <!-- ==================== VISTA COMPLETA Y ROBUSTA: /asesoria ==================== -->
-    <div x-show="currentView === 'asesoria'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper" style="display: none;">
+    <div x-show="currentView === 'asesoria'" class="py-20 px-6 max-w-6xl mx-auto space-y-16 bg-animated-wrapper overflow-hidden" style="display: none;">
         <div class="glow-blob blob-1"></div>
 
-        <!-- Encabezado Robustecido -->
         <div class="space-y-6 text-center max-w-4xl mx-auto content-relative" data-aos="fade-down">
             <span class="text-neutral-400 font-bold text-xs uppercase tracking-widest bg-brand-smoke px-5 py-2 rounded-full border border-brand-border">Acompañamiento Estratégico 1 a 1</span>
             <h1 class="font-black-title text-4xl sm:text-6xl uppercase leading-tight">ASESORÍA PREMIUM DE CRECIMIENTO</h1>
             <p class="text-neutral-300 text-xl font-light max-w-3xl mx-auto leading-relaxed">Un acompañamiento estratégico para empresarios que quieren construir una empresa más sólida, rentable y preparada para crecer.</p>
         </div>
 
-        <!-- Bloque 1: Introducción con Imagen 'privado.jpg' -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
             <div class="lg:col-span-5 rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[420px]" data-aos="fade-right">
                 <img :src="GITHUB_BASE_URL + 'privado.jpg'" alt="Sesión privada Caleb" class="w-full h-full object-cover">
@@ -765,7 +765,6 @@
             </div>
         </div>
 
-        <!-- ¿Qué trabajaremos juntos? ROBUSTO Y DETALLADO -->
         <div class="space-y-8 content-relative">
             <div class="text-center space-y-3" data-aos="fade-up">
                 <h2 class="font-black-title text-3xl sm:text-5xl uppercase">¿Qué trabajaremos juntos?</h2>
@@ -773,7 +772,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- 1. Estrategia de crecimiento -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="font-black-title text-2xl uppercase text-brand-red">1. Estrategia de crecimiento</h3>
                     <ul class="space-y-2 text-sm text-neutral-300 font-light">
@@ -785,7 +783,6 @@
                     </ul>
                 </div>
 
-                <!-- 2. Marketing estratégico -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="font-black-title text-2xl uppercase text-brand-red">2. Marketing estratégico</h3>
                     <ul class="space-y-2 text-sm text-neutral-300 font-light">
@@ -797,7 +794,6 @@
                     </ul>
                 </div>
 
-                <!-- 3. Estrategia comercial -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="font-black-title text-2xl uppercase text-brand-red">3. Estrategia comercial</h3>
                     <ul class="space-y-2 text-sm text-neutral-300 font-light">
@@ -809,7 +805,6 @@
                     </ul>
                 </div>
 
-                <!-- 4. Optimización del negocio -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4" data-aos="fade-up" data-aos-delay="400">
                     <h3 class="font-black-title text-2xl uppercase text-brand-red">4. Optimización del negocio</h3>
                     <ul class="space-y-2 text-sm text-neutral-300 font-light">
@@ -821,7 +816,6 @@
                     </ul>
                 </div>
 
-                <!-- 5. Toma de decisiones -->
                 <div class="p-8 rounded-3xl bg-brand-darkCard border border-brand-border space-y-4 md:col-span-2" data-aos="fade-up" data-aos-delay="500">
                     <h3 class="font-black-title text-2xl uppercase text-brand-red">5. Toma de decisiones estratégica</h3>
                     <p class="text-neutral-300 text-sm font-light leading-relaxed">
@@ -831,7 +825,6 @@
             </div>
         </div>
 
-        <!-- ¿Qué incluye la asesoría? -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center content-relative">
             <div class="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-brand-smoke border border-brand-border space-y-6" data-aos="fade-right">
                 <h3 class="font-black-title text-3xl uppercase">¿Qué incluye la Asesoría Premium?</h3>
@@ -850,7 +843,6 @@
             </div>
         </div>
 
-        <!-- ¿Para quién es esta Asesoría? -->
         <div class="p-10 rounded-3xl bg-brand-darkCard border border-brand-border space-y-8 content-relative" data-aos="fade-up">
             <h2 class="font-black-title text-3xl uppercase text-center">Este servicio es para empresarios que...</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-neutral-300 font-light">
@@ -881,8 +873,8 @@
             </div>
         </div>
 
-        <!-- Formulario Asesoría Premium -->
-        <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-8 max-w-3xl mx-auto content-relative" data-aos="fade-up" x-data="{ loading: false, nombre: '', negocio: '', correo: '', whatsapp: '', etapa: '', ingresos: '', freno: '' }">
+        <!-- FORMULARIO ASESORÍA PREMIUM CON SELECTOR DE PAÍS CONECTADO A WHATSAPP -->
+        <div class="bg-brand-darkCard p-8 sm:p-12 rounded-3xl border border-brand-border shadow-2xl space-y-8 max-w-3xl mx-auto content-relative" data-aos="fade-up" x-data="{ loading: false, nombre: '', negocio: '', correo: '', codigoPais: '+51', whatsapp: '', etapa: '', ingresos: '', freno: '' }">
             <div class="space-y-2 text-center border-b border-brand-border pb-6">
                 <h2 class="font-black-title text-3xl sm:text-4xl uppercase">Solicitar Asesoría Premium</h2>
                 <p class="text-xs text-brand-red font-bold uppercase tracking-widest">Acompañamiento directo 1 a 1 con Caleb De La Piedra</p>
@@ -890,8 +882,9 @@
 
             <form @submit.prevent="
                 loading = true;
+                const waCompleto = formatearWhatsApp(codigoPais, whatsapp);
                 if(SHEET_DIAGNOSTICO_URL) {
-                    fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp, etapa, ingresos, freno, servicio: 'Asesoría Premium', fecha: new Date() }) });
+                    fetch(SHEET_DIAGNOSTICO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, negocio, correo, whatsapp: waCompleto, etapa, ingresos, freno, servicio: 'Asesoría Premium', fecha: new Date() }) });
                 }
                 const msg = `Hola Caleb, quiero solicitar la Asesoría Premium de Crecimiento.\nNegocio: ${negocio}\nCorreo: ${correo}\nEtapa: ${etapa}\nIngresos mensuales: ${ingresos}\nPrincipal freno: ${freno}`;
                 window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -909,9 +902,26 @@
                         <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">Correo electrónico *</label>
                         <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
                     </div>
+                    
+                    <!-- SELECTOR DE PAÍS + WHATSAPP -->
                     <div>
-                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp *</label>
-                        <input required x-model="whatsapp" type="tel" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                        <label class="text-xs uppercase font-bold text-neutral-300 block mb-1">WhatsApp con País *</label>
+                        <div class="flex gap-2">
+                            <select x-model="codigoPais" class="w-28 bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-xs text-brand-white focus:outline-none focus:border-brand-red font-bold">
+                                <option value="+51">🇵🇪 +51</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+57">🇨🇴 +57</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+54">🇦🇷 +54</option>
+                                <option value="+56">🇨🇱 +56</option>
+                                <option value="+593">🇪🇨 +593</option>
+                                <option value="+591">🇧🇴 +591</option>
+                                <option value="+502">🇬🇹 +502</option>
+                                <option value="+506">🇨🇷 +506</option>
+                            </select>
+                            <input required x-model="whatsapp" type="tel" placeholder="999 999 999" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red">
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -924,7 +934,6 @@
                     </select>
                 </div>
 
-                <!-- CAMPO EXCLUSIVO INGRESOS -->
                 <div>
                     <label class="text-xs uppercase font-bold text-brand-red block mb-1">¿Cuál es tu rango de facturación / ingresos mensuales promedio? *</label>
                     <select required x-model="ingresos" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-3.5 text-brand-white focus:outline-none focus:border-brand-red font-medium">
@@ -954,10 +963,10 @@
     </div>
 
     <!-- ==================== VISTA COMPLETA: /contacto ==================== -->
-    <div x-show="currentView === 'contacto'" class="py-24 px-6 max-w-7xl mx-auto bg-animated-wrapper" style="display: none;">
+    <div x-show="currentView === 'contacto'" class="py-24 px-6 max-w-7xl mx-auto bg-animated-wrapper overflow-hidden" style="display: none;">
         <div class="glow-blob blob-2"></div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start content-relative" x-data="{ loading: false, nombre: '', empresa: '', whatsapp: '', correo: '', etapa: '', motivo: '', mensaje: '' }">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start content-relative">
             
             <div class="lg:col-span-5 space-y-10 lg:sticky lg:top-28" data-aos="fade-right">
                 <div class="space-y-6">
@@ -998,16 +1007,18 @@
                 </div>
             </div>
 
+            <!-- FORMULARIO CONTACTO CON SELECTOR DE PAÍS CONECTADO A WHATSAPP -->
             <div class="lg:col-span-7 space-y-6" data-aos="fade-left">
                 <div class="bg-brand-darkCard p-8 sm:p-10 rounded-3xl border border-brand-border shadow-2xl">
                     <form @submit.prevent="
                         loading = true;
+                        const waCompleto = formatearWhatsApp(codigoPais, whatsapp);
                         if(SHEET_CONTACTO_URL) {
-                            fetch(SHEET_CONTACTO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, empresa, whatsapp, correo, etapa, motivo, mensaje, fecha: new Date() }) });
+                            fetch(SHEET_CONTACTO_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nombre, empresa, whatsapp: waCompleto, correo, etapa, motivo, mensaje, fecha: new Date() }) });
                         }
                         const msg = `Hola Caleb, soy ${nombre} (${correo}) de ${empresa}.\nEtapa: ${etapa}\nMotivo: ${motivo}\nMensaje: ${mensaje}`;
                         window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-                    " class="space-y-6">
+                    " class="space-y-6" x-data="{ loading: false, nombre: '', empresa: '', codigoPais: '+51', whatsapp: '', correo: '', etapa: '', motivo: '', mensaje: '' }">
 
                         <div class="space-y-2">
                             <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Nombre completo *</label>
@@ -1024,9 +1035,26 @@
                                 <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">Correo electrónico *</label>
                                 <input required x-model="correo" type="email" placeholder="tu@empresa.com" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
                             </div>
+
+                            <!-- SELECTOR DE PAÍS + WHATSAPP -->
                             <div class="space-y-2">
-                                <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">WhatsApp *</label>
-                                <input required x-model="whatsapp" type="tel" placeholder="+51 999 999 999" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
+                                <label class="text-xs uppercase font-bold tracking-widest text-neutral-400 block">WhatsApp con País *</label>
+                                <div class="flex gap-2">
+                                    <select x-model="codigoPais" class="w-28 bg-brand-smoke border border-brand-border rounded-xl p-4 text-xs text-brand-white focus:outline-none focus:border-brand-red font-bold">
+                                        <option value="+51">🇵🇪 +51</option>
+                                        <option value="+52">🇲🇽 +52</option>
+                                        <option value="+57">🇨🇴 +57</option>
+                                        <option value="+34">🇪🇸 +34</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+54">🇦🇷 +54</option>
+                                        <option value="+56">🇨🇱 +56</option>
+                                        <option value="+593">🇪🇨 +593</option>
+                                        <option value="+591">🇧🇴 +591</option>
+                                        <option value="+502">🇬🇹 +502</option>
+                                        <option value="+506">🇨🇷 +506</option>
+                                    </select>
+                                    <input required x-model="whatsapp" type="tel" placeholder="999 999 999" class="w-full bg-brand-smoke border border-brand-border rounded-xl p-4 text-brand-white focus:border-brand-red focus:outline-none transition-colors">
+                                </div>
                             </div>
                         </div>
 
